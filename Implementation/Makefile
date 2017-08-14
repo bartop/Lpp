@@ -32,6 +32,7 @@ $(TARGET)_$(SUBPROJ)_REQS = $(patsubst %,$(patsubst %,%/$(TARGET)/$(ODIR)/lib%.a
 
 $$($(TARGET)_$(SUBPROJ)): $$($(TARGET)_$(SUBPROJ)_REQS)
 	$(MAKE) $(TARGET) -C $(SUBPROJ)
+	mkdir -p $$(@D)
 	cp $$< $$@
 
 endef
