@@ -3,6 +3,6 @@
 #|  GENERAL SETTINGS  |
 #| 				      |
 #\--------------------/
-OUTPUT = libNumber.a
+PROJECT = Number
 
 include ../../Buildtools/Makefile.template.mk

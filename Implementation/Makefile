@@ -18,7 +18,7 @@ TARGETS = Debug Release
 all: $(TARGETS)
 
 define RULE
-$(TARGET)_SUBPROJECTS = $(patsubst %,$(TARGET)/lib%.a,$(_SUBPROJECTS))
+$(TARGET)_SUBPROJECTS = $(patsubst %,$(TARGET)_%,$(_SUBPROJECTS))
 
 $(TARGET): $$($(TARGET)_SUBPROJECTS)
 
@@ -27,13 +27,11 @@ endef
 $(foreach TARGET,$(TARGETS),$(eval $(RULE)))
 
 define RULE2
-$(TARGET)_$(SUBPROJ) = $(patsubst %,$(TARGET)/lib%.a,$(SUBPROJ))
-$(TARGET)_$(SUBPROJ)_REQS = $(patsubst %,$(patsubst %,%/$(TARGET)/$(ODIR)/lib%.a,$(SUBPROJ)),$(SUBPROJ))
 
-$$($(TARGET)_$(SUBPROJ)): $$($(TARGET)_$(SUBPROJ)_REQS)
+$(TARGET)_$(SUBPROJ):
 	$(MAKE) $(TARGET) -C $(SUBPROJ)
-	mkdir -p $$(@D)
-	cp $$< $$@
+	mkdir -p "$(TARGET)"
+	cp "$(SUBPROJ)/$(TARGET)/$(ODIR)/*" "$(TARGET)"
 
 endef
 

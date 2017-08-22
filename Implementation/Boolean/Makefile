@@ -3,6 +3,6 @@
 #|  GENERAL SETTINGS  |
 #| 				      |
 #\--------------------/
-OUTPUT = libBoolean.a
+PROJECT = Boolean
 
 include ../../Buildtools/Makefile.template.mk
