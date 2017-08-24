@@ -11,8 +11,6 @@ public:
 	bool equals(Pointer<const Boolean> _boolean) const final override;
 
 	virtual bool value() const = 0;
-
-	virtual ~Boolean() = default;
 };
 
 }

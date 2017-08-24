@@ -31,7 +31,7 @@ TEST_FLAGS ?= $(Debug_FLAGS) -Wall -Wextra -pedantic -std=c++14
 #|  MAKEFILE RULES   |
 #|				     |
 #\-------------------/
-.PHONY: all $(TARGETS) test clean cleanTests $(patsubst %,$(TARGET)/$(TEMPDIR)/%,$(_OBJS))
+.PHONY: all $(TARGETS) test clean cleanTests $(TESTS) $(patsubst %,clean%,$(TARGETS))
 all: $(TARGETS) test
 
 test: $(TESTS)
@@ -47,7 +47,7 @@ define TESTS_RULE
 $(TEST): $(TESTODIR)/$(TEST).exe | $(TESTODIR)
 	$$<
 
-$(TESTODIR)/$(TEST).exe: $(TESTIDIR)/$$(TEST).cpp Debug/$(ODIR)/$(OUTPUT)
+$(TESTODIR)/$(TEST).exe: $(TESTIDIR)/$$(TEST).cpp Debug/$(ODIR)/$(OUTPUT) | $(TESTODIR)
 	$(CXX) -o "$$@" $$< $(TEST_FLAGS) -LDebug/$(ODIR) -l$(PROJECT)
 
 endef
@@ -75,7 +75,6 @@ endef
 
 $(foreach TARGET,$(TARGETS),$(eval $(TARGETS_RULE)))
 $(foreach TEST,$(TESTS),$(eval $(TESTS_RULE)))
-$(foreach TEST,$(TESTS),$(info $(TESTS_RULE)))
 
 clean: cleanTests
 	rm -f $$(find $(TARGETS) -type f)

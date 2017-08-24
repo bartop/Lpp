@@ -17,7 +17,7 @@ private:
 
 }
 
-std::unique_ptr<Boolean> boolean(bool _value) {
+std::unique_ptr<const Boolean> boolean(bool _value) {
 	return std::make_unique<BasicBoolean>(_value);
 }
 
