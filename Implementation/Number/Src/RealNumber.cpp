@@ -5,7 +5,7 @@
 namespace Lpp{
 
 
-ResultOfComparison RealNumber::compare(std::shared_ptr<const RealNumber> _realNumber) const{
+ResultOfComparison RealNumber::compare(Shared<const RealNumber> _realNumber) const{
 	return Lpp::compare(this->realValue(), _realNumber->realValue());
 }
 

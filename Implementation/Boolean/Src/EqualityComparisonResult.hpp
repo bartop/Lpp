@@ -12,21 +12,21 @@ template<typename T>
 class EqualityComparisonResult final : public Boolean{
 public:
 	EqualityComparisonResult(
-		Pointer<const T> _left,
-		Pointer<const T> _right
+		Shared<const T> _left,
+		Shared<const T> _right
 	);
 
 	bool value() const final override;
 
 private:
-	const Pointer<const T> m_left;
-	const Pointer<const T> m_right;
+	const Shared<const T> m_left;
+	const Shared<const T> m_right;
 };
 
 template<typename T>
 EqualityComparisonResult<T>::EqualityComparisonResult (
-	Pointer<const T> _left,
-	Pointer<const T> _right
+	Shared<const T> _left,
+	Shared<const T> _right
 ) : m_left(_left), m_right(_right){
 }
 
@@ -36,9 +36,9 @@ bool EqualityComparisonResult<T>::value() const{
 }
 
 template<typename T>
-std::unique_ptr<const Boolean> compareForEquality(
-	Pointer<T> _left,
-	Pointer<T> _right
+Unique<const Boolean> compareForEquality(
+	Shared<T> _left,
+	Shared<T> _right
 ){
 	return std::make_unique<const EqualityComparisonResult<T>>(
 		_left,
@@ -47,13 +47,13 @@ std::unique_ptr<const Boolean> compareForEquality(
 }
 
 template<typename T>
-std::unique_ptr<const Boolean> compareForEquality(
-	std::unique_ptr<const T> _left,
-	std::unique_ptr<const T> _right
+Unique<const Boolean> compareForEquality(
+	Unique<const T> _left,
+	Unique<const T> _right
 ){
 	return std::make_unique<const EqualityComparisonResult<T>>(
-		Pointer<const T>(std::move(_left)),
-		Pointer<const T>(std::move(_right))
+		Shared<const T>(std::move(_left)),
+		Shared<const T>(std::move(_right))
 	);
 }
 

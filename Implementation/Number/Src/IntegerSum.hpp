@@ -6,18 +6,18 @@ namespace Lpp{
 
 class IntegerSum final : public Integer {
 public:
-	IntegerSum(Pointer<Integer> _lhs, Pointer<Integer> _rhs);
+	IntegerSum(Shared<Integer> _lhs, Shared<Integer> _rhs);
 
 	IntegerExchangeFormat integerValue() const final override;
 
 private:
-	const Pointer<Integer> m_lhs;
-	const Pointer<Integer> m_rhs;
+	const Shared<Integer> m_lhs;
+	const Shared<Integer> m_rhs;
 };
 
-std::unique_ptr<IntegerSum> sum(
-	Pointer<Integer> _lhs,
-	Pointer<Integer> _rhs
+Unique<IntegerSum> sum(
+	Shared<Integer> _lhs,
+	Shared<Integer> _rhs
 );
 
 }

@@ -6,6 +6,6 @@
 
 namespace Lpp{
 
-std::unique_ptr<const Boolean> boolean(bool _value);
+Unique<const Boolean> boolean(bool _value);
 
 }

@@ -4,8 +4,8 @@
 
 namespace Lpp{
 
-BasicComplex::BasicComplex(std::shared_ptr<const RealNumber> _realPart,
-    std::shared_ptr<const RealNumber> _imaginaryPart) : m_realPart(_realPart),
+BasicComplex::BasicComplex(Shared<const RealNumber> _realPart,
+    Shared<const RealNumber> _imaginaryPart) : m_realPart(_realPart),
 	m_imaginaryPart(_imaginaryPart){}
 
 NumberExchangeFormat BasicComplex::numberValue() const{

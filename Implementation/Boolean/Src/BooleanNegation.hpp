@@ -6,6 +6,6 @@
 
 namespace Lpp{
 
-std::unique_ptr<Boolean> logicalNegation(Pointer<const Boolean> _boolean);
+Unique<Boolean> logicalNegation(Shared<const Boolean> _boolean);
 
 }

@@ -6,8 +6,8 @@
 
 namespace Lpp{
 
-std::unique_ptr<Boolean> booleanCache(
-	Pointer<const Boolean> _boolean
+Unique<Boolean> booleanCache(
+	Shared<const Boolean> _boolean
 );
 
 }

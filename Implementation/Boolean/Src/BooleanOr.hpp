@@ -6,9 +6,9 @@
 
 namespace Lpp{
 
-std::unique_ptr<Boolean> logicalOr(
-	Pointer<const Boolean> _left,
-	Pointer<const Boolean> _right
+Unique<Boolean> logicalOr(
+	Shared<const Boolean> _left,
+	Shared<const Boolean> _right
 );
 
 }

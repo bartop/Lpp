@@ -1,5 +1,6 @@
 
 #include "CachingBoolean.hpp"
+#include <optional>
 
 namespace Lpp{
 
@@ -7,35 +8,31 @@ namespace{
 
 class CachingBoolean final : public Boolean{
 public:
-	CachingBoolean(Pointer<const Boolean> _boolean);
+	CachingBoolean(Shared<const Boolean> _boolean);
 
 	bool value() const final override;
 
 private:
-	Pointer<const Boolean> m_boolean;
+	Shared<const Boolean> m_boolean;
 
-	mutable bool m_cacheFilled;
-	mutable bool m_cache;
+	mutable std::optional<bool> m_cache;
 };
 
-}
-
-std::unique_ptr<Boolean> booleanCache(
-	Pointer<const Boolean> _boolean
-){
-	return std::make_unique<CachingBoolean>(_boolean);
-}
-CachingBoolean::CachingBoolean(Pointer<const Boolean> _boolean) :
-	m_boolean(_boolean){}
+CachingBoolean::CachingBoolean(Shared<const Boolean> _boolean) :
+	m_boolean(_boolean), m_cache(){}
 
 bool CachingBoolean::value() const {
-	if (m_cacheFilled){
-		return m_cache;
-	}
-	else{
-		m_cacheFilled = true;
-		return m_cache = m_boolean->value();
-	}
+	if (!m_cache.has_value())
+		m_cache = m_boolean->value();
+	return *m_cache;
+}
+
+}
+
+Unique<Boolean> booleanCache(
+	Shared<const Boolean> _boolean
+){
+	return std::make_unique<CachingBoolean>(_boolean);
 }
 
 }

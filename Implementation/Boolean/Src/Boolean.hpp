@@ -8,7 +8,7 @@ namespace Lpp{
 
 class Boolean : public ValueObject<Boolean> {
 public:
-	bool equals(Pointer<const Boolean> _boolean) const final override;
+	bool equals(Shared<const Boolean> _boolean) const final override;
 
 	virtual bool value() const = 0;
 };

@@ -5,7 +5,7 @@
 
 namespace Lpp{
 
-IntegerFromReal::IntegerFromReal(Pointer<RealNumber> _real)
+IntegerFromReal::IntegerFromReal(Shared<RealNumber> _real)
 	: m_real(_real)
 {}
 
@@ -14,8 +14,8 @@ IntegerExchangeFormat IntegerFromReal::integerValue() const {
 	return integerDivide(realVal.numerator, realVal.denominator).first;
 }
 
-std::unique_ptr<IntegerFromReal> toInteger(
-	Pointer<RealNumber> _real
+Unique<IntegerFromReal> toInteger(
+	Shared<RealNumber> _real
 ){
 	return std::make_unique<IntegerFromReal>(_real);
 }

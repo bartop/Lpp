@@ -8,16 +8,16 @@ class RealNumber;
 
 class IntegerFromReal final : public Integer {
 public:
-	IntegerFromReal(Pointer<RealNumber> _real);
+	IntegerFromReal(Shared<RealNumber> _real);
 
 	IntegerExchangeFormat integerValue() const final override;
 
 private:
-	const Pointer<RealNumber> m_real;
+	const Shared<RealNumber> m_real;
 };
 
-std::unique_ptr<IntegerFromReal> toInteger(
-	Pointer<RealNumber> _real
+Unique<IntegerFromReal> toInteger(
+	Shared<RealNumber> _real
 );
 
 }
