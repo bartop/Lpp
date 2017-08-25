@@ -8,12 +8,15 @@ TESTODIR = Test
 
 OUTPUT = lib$(PROJECT).a
 
-
 CXX ?= g++
-CXXFLAGS ?= -c -Wall -Wextra -pedantic -std=c++14
+WARNING_FLAGS = -Wall -Wextra -Weffc++ -pedantic
+CXX_VERSION = -std=c++1z
+CXXFLAGS ?= $(WARNING_FLAGS) $(CXX_VERSION)
 
 _OBJS = $(shell (find Src -type f -name *.cpp -printf "%f " | sed 's/.cpp/.o/g'))
-TESTS = $(shell (find TestSrc -type f -name *.cpp -printf "%f " | sed 's/.cpp//g'))
+TESTS = $(shell (if [ -d TestSrc ]; then (find TestSrc -type f -name *.cpp -printf "%f " | sed 's/.cpp//g'); fi;  ))
+
+
 
 #/--------------------\
 #| 				      |
@@ -24,7 +27,7 @@ TESTS = $(shell (find TestSrc -type f -name *.cpp -printf "%f " | sed 's/.cpp//g
 TARGETS = Debug Release
 Debug_FLAGS = -Og -g3
 Release_FLAGS = -O3 -g0 -DNDEBUG
-TEST_FLAGS ?= $(Debug_FLAGS) -Wall -Wextra -pedantic -std=c++14
+TEST_FLAGS = $(Debug_FLAGS) $(CXXFLAGS)
 
 #/-------------------\
 #|	 			     |
@@ -39,15 +42,21 @@ test: $(TESTS)
 $(TESTODIR):
 	mkdir -p "$@"
 
+$(TESTIDIR):
+	mkdir -p "$@"
+
 cleanTests:
-	rm -f "$(TESTODIR)/*"
+	rm -f "$(TESTODIR)"/*
+
+$(IDIR):
+	mkdir -p "$$@"
 
 define TESTS_RULE
 
 $(TEST): $(TESTODIR)/$(TEST).exe | $(TESTODIR)
 	$$<
 
-$(TESTODIR)/$(TEST).exe: $(TESTIDIR)/$$(TEST).cpp Debug/$(ODIR)/$(OUTPUT) | $(TESTODIR)
+$(TESTODIR)/$(TEST).exe: $(TESTIDIR)/$$(TEST).cpp Debug/$(ODIR)/$(OUTPUT) | $(TESTODIR) $(TESTIDIR)
 	$(CXX) -o "$$@" $$< $(TEST_FLAGS) -LDebug/$(ODIR) -l$(PROJECT)
 
 endef
@@ -60,8 +69,8 @@ $(TARGET): $(TARGET)/$(ODIR)/$(OUTPUT)
 $(TARGET)/$(ODIR)/$(OUTPUT): $$($(TARGET)_OBJS) | $(TARGET)/$(ODIR)
 	ar crf "$$@" $$^
 
-$(TARGET)/$(TEMPDIR)/%.o: $(IDIR)/%.cpp | $(TARGET)/$(TEMPDIR)
-	$(CXX) -o "$$@" "$$<" $(CXXFLAGS) $($(TARGET)_FLAGS)
+$(TARGET)/$(TEMPDIR)/%.o: $(IDIR)/%.cpp | $(TARGET)/$(TEMPDIR) $(IDIR)
+	$(CXX) -o "$$@" "$$<" -c $(CXXFLAGS) $($(TARGET)_FLAGS)
 
 $(TARGET)/$(TEMPDIR):
 	mkdir -p "$$@"
