@@ -112,14 +112,23 @@ std::vector<unsigned> removeUnusedBytes(
 	return _vector;
 }
 
-bool overflowed(
+inline
+bool overflowedNegative(
 	const std::vector<unsigned> &_lhs,
 	const std::vector<unsigned> &_rhs,
-	unsigned _carry
+	const std::vector<unsigned> &_result
 ){
-	return getSign(_lhs) && getSign(_rhs) && _carry;
+	return getSign(_lhs) && getSign(_rhs) && !getSign(_result);
 }
 
+inline
+bool overflowedPositive(
+	const std::vector<unsigned> &_lhs,
+	const std::vector<unsigned> &_rhs,
+	const std::vector<unsigned> &_result
+){
+	return !getSign(_lhs) && !getSign(_rhs) && getSign(_result);
+}
 std::vector<unsigned> addVectors(
 	const std::vector<unsigned> &_lhs,
 	const std::vector<unsigned> &_rhs
@@ -136,8 +145,11 @@ std::vector<unsigned> addVectors(
 		++i;
 	}
 
-	if(overflowed(_lhs, _rhs, carry))
+	if(overflowedNegative(_lhs, _rhs, result))
 		result.push_back(NEGATIVE_SIGN_MEANINGLESS_VALUE);
+
+	if(overflowedPositive(_lhs, _rhs, result))
+		result.push_back(POSITIVE_SIGN_MEANINGLESS_VALUE);
 
 	return removeUnusedBytes(result);
 }

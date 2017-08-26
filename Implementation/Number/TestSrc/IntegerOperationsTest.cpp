@@ -12,13 +12,13 @@ using namespace Lpp;
 TEST_CASE( "IntegerOperations tests", "[IntegerOperations.hpp]" ) {
 	const auto zero = INTEGER_ZERO;
 	const auto one = INTEGER_ONE;
-	IntegerExchangeFormat minusOne({static_cast<unsigned>(-1)});
+	const IntegerExchangeFormat minusOne({static_cast<unsigned>(-1)});
 
-	IntegerExchangeFormat hundred({100});
-	IntegerExchangeFormat bigNumber({1024, 1});
-	IntegerExchangeFormat biggerNumber({1024, 2});
-	IntegerExchangeFormat smallNumber({0xFFFFFC00, 0xFFFFFFFE});
-	IntegerExchangeFormat hugeNumber({1000, 2, 1});
+	const IntegerExchangeFormat hundred({100});
+	const IntegerExchangeFormat bigNumber({1024, 1});
+	const IntegerExchangeFormat biggerNumber({1024, 2});
+	const IntegerExchangeFormat smallNumber({0xFFFFFC00, 0xFFFFFFFE});
+	const IntegerExchangeFormat hugeNumber({1000, 2, 1});
 
 	SECTION("Comparisons test") {
 		CHECK(equals(zero, zero));
@@ -72,11 +72,20 @@ TEST_CASE( "IntegerOperations tests", "[IntegerOperations.hpp]" ) {
 		CHECK(equals(add(one, minusOne), zero));
 		CHECK(equals(add(one, zero), one));
 		CHECK(equals(add(minusOne, zero), minusOne));
+		CHECK(equals(add(bigNumber, smallNumber), zero));
+		CHECK(equals(add(bigNumber, bigNumber), IntegerExchangeFormat({2048, 2})));
+		CHECK(equals(add(biggerNumber, bigNumber), IntegerExchangeFormat({2048, 3})));
+		CHECK(equals(add(smallNumber, smallNumber), IntegerExchangeFormat({0xFFFFF800, 0xFFFFFFFD})));
+		CHECK(equals(add(biggerNumber, smallNumber), IntegerExchangeFormat({0, 1})));
+		CHECK(equals(add(hundred, smallNumber), IntegerExchangeFormat({0xFFFFFC64, 0xFFFFFFFE})));
 
 		CHECK(equals(add(one, minusOne), add(minusOne, one)));
+		CHECK(equals(add(bigNumber, biggerNumber), add(biggerNumber, bigNumber)));
+
 	}
 
 	SECTION("Multiplication tests") {
+
 		CHECK(equals(multiply(one, minusOne), minusOne));
 		CHECK(equals(multiply(one, zero), zero));
 		CHECK(equals(multiply(minusOne, zero), zero));
@@ -88,15 +97,24 @@ TEST_CASE( "IntegerOperations tests", "[IntegerOperations.hpp]" ) {
 		CHECK(equals(absoluteValue(one), one));
 		CHECK(equals(absoluteValue(zero), zero));
 		CHECK(equals(absoluteValue(minusOne), one));
+		CHECK(equals(absoluteValue(smallNumber), bigNumber));
 	}
 
 	SECTION("Division tests") {
+		const IntegerExchangeFormat ten({10});
+		const IntegerExchangeFormat bigNumPlusTen(add(ten, bigNumber));
+		const IntegerExchangeFormat smallNumPlusTen(add(ten, smallNumber));
 		CHECK(equals(integerDivide(one, one).first, one));
 		CHECK(equals(integerDivide(zero, one).first, zero));
 		CHECK(equals(integerDivide(zero, minusOne).first, zero));
 		CHECK(equals(integerDivide(one, minusOne).first, minusOne));
 		CHECK(equals(integerDivide(minusOne, one).first, minusOne));
 		CHECK(equals(integerDivide(minusOne, minusOne).first, one));
+		CHECK(equals(integerDivide(bigNumber, bigNumber).first, one));
+		CHECK(equals(integerDivide(zero, bigNumber).first, zero));
+		CHECK(equals(integerDivide(bigNumber, smallNumber).first, minusOne));
+		CHECK(equals(integerDivide(bigNumPlusTen, bigNumber).first, one));
+		CHECK(equals(integerDivide(smallNumPlusTen, bigNumber).first, zero));
 
 		CHECK(equals(integerDivide(one, one).second, zero));
 		CHECK(equals(integerDivide(zero, one).second, zero));
@@ -104,6 +122,11 @@ TEST_CASE( "IntegerOperations tests", "[IntegerOperations.hpp]" ) {
 		CHECK(equals(integerDivide(one, minusOne).second, zero));
 		CHECK(equals(integerDivide(minusOne, one).second, zero));
 		CHECK(equals(integerDivide(one, minusOne).second, zero));
+		CHECK(equals(integerDivide(bigNumber, bigNumber).second, zero));
+		CHECK(equals(integerDivide(zero, bigNumber).second, zero));
+		CHECK(equals(integerDivide(bigNumber, smallNumber).second, zero));
+		CHECK(equals(integerDivide(bigNumPlusTen, bigNumber).second, ten));
+		CHECK(equals(integerDivide(smallNumPlusTen, bigNumber).second, smallNumPlusTen));
 	}
 
 	SECTION("Min/max tests") {
