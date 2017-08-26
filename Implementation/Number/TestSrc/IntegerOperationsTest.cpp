@@ -73,3 +73,33 @@ TEST_CASE( "Basic multiplication tests", "[IntegerOperations.hpp]" ) {
 
 	CHECK(equals(multiply(one, minusOne), multiply(minusOne, one)));
 }
+
+TEST_CASE( "Basic abs tests", "[IntegerOperations.hpp]" ) {
+	const auto zero = INTEGER_ZERO;
+	const auto one = INTEGER_ONE;
+	IntegerExchangeFormat minusOne({static_cast<unsigned>(-1)});
+
+	CHECK(equals(absoluteValue(one), one));
+	CHECK(equals(absoluteValue(zero), zero));
+	CHECK(equals(absoluteValue(minusOne), one));
+}
+
+TEST_CASE( "Basic division tests", "[IntegerOperations.hpp]" ) {
+	const auto zero = INTEGER_ZERO;
+	const auto one = INTEGER_ONE;
+	IntegerExchangeFormat minusOne({static_cast<unsigned>(-1)});
+
+	CHECK(equals(integerDivide(one, one).first, one));
+	CHECK(equals(integerDivide(zero, one).first, zero));
+	CHECK(equals(integerDivide(zero, minusOne).first, zero));
+	CHECK(equals(integerDivide(one, minusOne).first, minusOne));
+	CHECK(equals(integerDivide(minusOne, one).first, minusOne));
+	CHECK(equals(integerDivide(minusOne, minusOne).first, one));
+
+	CHECK(equals(integerDivide(one, one).second, zero));
+	CHECK(equals(integerDivide(zero, one).second, zero));
+	CHECK(equals(integerDivide(zero, minusOne).second, zero));
+	CHECK(equals(integerDivide(one, minusOne).second, zero));
+	CHECK(equals(integerDivide(minusOne, one).second, zero));
+	CHECK(equals(integerDivide(one, minusOne).second, zero));
+}

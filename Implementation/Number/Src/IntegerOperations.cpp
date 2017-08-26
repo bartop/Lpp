@@ -127,7 +127,9 @@ std::vector<unsigned> addVectors(
 	unsigned carry = 0;
 	unsigned i = 0;
 	while(i < std::max(_lhs.size(), _rhs.size())){
-		const auto sum = addWithCarry(safeAt(_lhs, i), safeAt(_rhs, i), carry);
+		const auto sum =
+			addWithCarry(safeAt(_lhs, i), safeAt(_rhs, i), carry);
+
 		result.push_back(sum.first);
 		carry = sum.second;
 		++i;
@@ -148,9 +150,12 @@ std::vector<unsigned> multiplyWithShiftByNumber(
 	std::vector<unsigned> result(_lhs.size() + _shift + 1);
 	for(unsigned i = 0; i < _lhs.size(); ++i){
 		const auto multiplyResult  = multiply(_rhs, _lhs[i]);
-		const auto addResult = addWithCarry(multiplyResult.first, result[i + _shift], 0);
+		const auto addResult =
+			addWithCarry(multiplyResult.first, result[i + _shift], 0);
+
 		result[i + _shift] = addResult.first;
-		result[i + _shift + 1] = multiplyResult.second + addResult.second;
+		result[i + _shift + 1] =
+			multiplyResult.second + addResult.second;
 	}
 
 	while(result[result.size() - 1] == 0)
@@ -173,7 +178,7 @@ std::pair<IntegerExchangeFormat,
 	std::stack<IntegerExchangeFormat> cache;
 	cache.push(INTEGER_ZERO);
 	cache.push(_lhs);
-	while(comparisonResult == ResultOfComparison::LeftSideGreater){
+	while(comparisonResult != ResultOfComparison::RightSideGreater){
 		const auto dividend = subtract(cache.top(), divisor);
 		cache.pop();
 		const auto result = add(cache.top(), INTEGER_ONE);
@@ -208,7 +213,8 @@ ResultOfComparison compare(
 		return ResultOfComparison::Equal;
 	else
 		return (getSign(difference.longInteger) == 0) ?
-			ResultOfComparison::LeftSideGreater : ResultOfComparison::RightSideGreater;
+			ResultOfComparison::LeftSideGreater :
+			ResultOfComparison::RightSideGreater;
 }
 
 IntegerExchangeFormat negate(
