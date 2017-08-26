@@ -10,7 +10,7 @@ OUTPUT = lib$(PROJECT).a
 
 CXX ?= g++
 WARNING_FLAGS = -Wall -Wextra -Weffc++ -pedantic
-CXX_VERSION = -std=c++1z
+CXX_VERSION = -std=c++17
 CXXFLAGS ?= $(WARNING_FLAGS) $(CXX_VERSION)
 
 _OBJS = $(shell (find Src -type f -name *.cpp -printf "%f " | sed 's/.cpp/.o/g'))

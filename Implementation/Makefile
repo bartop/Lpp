@@ -1,6 +1,6 @@
 
 export CXX = g++
-export CXXFLAGS ?= -c -Wall -Wextra -pedantic -std=c++14
+export CXXFLAGS ?= -c -Wall -Wextra -pedantic -std=c++17
 
 ODIR = Build
 
@@ -28,10 +28,12 @@ $(foreach TARGET,$(TARGETS),$(eval $(RULE)))
 
 define RULE2
 
-$(TARGET)_$(SUBPROJ):
+$(TARGET)_$(SUBPROJ): | $(TARGET)/$(ODIR)
 	$(MAKE) $(TARGET) -C $(SUBPROJ)
-	mkdir -p "$(TARGET)"
-	cp "$(SUBPROJ)/$(TARGET)/$(ODIR)/*" "$(TARGET)"
+	cp "$(SUBPROJ)/$(TARGET)/$(ODIR)/"* "$(TARGET)"
+
+$(TARGET)/$(ODIR):
+	mkdir -p "$$@"
 
 endef
 

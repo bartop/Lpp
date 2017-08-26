@@ -111,7 +111,15 @@ std::vector<unsigned> removeUnusedBytes(
 	return _vector;
 }
 
-std::vector<unsigned> internalAdd(
+bool overflowed(
+	const std::vector<unsigned> &_lhs,
+	const std::vector<unsigned> &_rhs,
+	unsigned _carry
+){
+	return getSign(_lhs) && getSign(_rhs) && _carry;
+}
+
+std::vector<unsigned> addVectors(
 	const std::vector<unsigned> &_lhs,
 	const std::vector<unsigned> &_rhs
 ){
@@ -125,9 +133,8 @@ std::vector<unsigned> internalAdd(
 		++i;
 	}
 
-	result.push_back(
-		carry ? NEGATIVE_SIGN_MEANINGLESS_VALUE : POSITIVE_SIGN_MEANINGLESS_VALUE
-	);
+	if(overflowed(_lhs, _rhs, carry))
+		result.push_back(NEGATIVE_SIGN_MEANINGLESS_VALUE);
 
 	return removeUnusedBytes(result);
 }
@@ -178,7 +185,6 @@ std::pair<IntegerExchangeFormat,
 
 }
 
-inline
 bool equals(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
@@ -206,7 +212,7 @@ IntegerExchangeFormat negate(
 	for(auto &it : result){
 		it = ~it;
 	}
-	return internalAdd(result, {1});
+	return addVectors(result, {1});
 }
 
 IntegerExchangeFormat absoluteValue(
@@ -219,7 +225,7 @@ IntegerExchangeFormat add(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
 ){
-	return internalAdd(_lhs.longInteger, _rhs.longInteger);
+	return addVectors(_lhs.longInteger, _rhs.longInteger);
 }
 
 IntegerExchangeFormat multiply(
@@ -233,7 +239,7 @@ IntegerExchangeFormat multiply(
 			_rhs.longInteger.at(i),
 			i
 		);
-		result = internalAdd(result, partialResult);
+		result = addVectors(result, partialResult);
 	}
 	return result;
 }

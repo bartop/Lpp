@@ -8,8 +8,6 @@
 
 namespace Lpp{
 
-
-
 bool equals(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
