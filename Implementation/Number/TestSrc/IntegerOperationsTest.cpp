@@ -10,34 +10,29 @@
 using namespace Lpp;
 
 TEST_CASE( "Comparisons tests for single numbers in integers", "[IntegerOperations.hpp]" ) {
-	const auto zero1 = INTEGER_ZERO;
-	const auto zero2 = INTEGER_ZERO;
+	const auto zero = INTEGER_ZERO;
+	const auto one = INTEGER_ONE;
+	IntegerExchangeFormat minusOne({static_cast<unsigned>(-1)});
 
-	const auto one1 = INTEGER_ONE;
-	const auto one2 = INTEGER_ONE;
+	CHECK(equals(zero, zero));
+	CHECK(equals(one, one));
+	CHECK(equals(minusOne, minusOne));
 
-	IntegerExchangeFormat minusOne1({static_cast<unsigned>(-1)});
-	IntegerExchangeFormat minusOne2({static_cast<unsigned>(-1)});
+	CHECK(!equals(zero, one));
+	CHECK(!equals(zero, minusOne));
+	CHECK(!equals(one, minusOne));
 
-	CHECK(equals(zero1, zero2));
-	CHECK(equals(one1, one2));
-	CHECK(equals(minusOne1, minusOne2));
+	CHECK(compare(zero, one) == ResultOfComparison::RightSideGreater);
+	CHECK(compare(zero, minusOne) == ResultOfComparison::LeftSideGreater);
+	CHECK(compare(one, minusOne) == ResultOfComparison::LeftSideGreater);
 
-	CHECK(!equals(zero1, one1));
-	CHECK(!equals(zero1, minusOne1));
-	CHECK(!equals(one1, minusOne1));
+	CHECK(compare(one, zero) == ResultOfComparison::LeftSideGreater);
+	CHECK(compare(minusOne, zero) == ResultOfComparison::RightSideGreater);
+	CHECK(compare(minusOne, one) == ResultOfComparison::RightSideGreater);
 
-	CHECK(compare(zero1, one1) == ResultOfComparison::RightSideGreater);
-	CHECK(compare(zero1, minusOne1) == ResultOfComparison::LeftSideGreater);
-	CHECK(compare(one1, minusOne1) == ResultOfComparison::LeftSideGreater);
-
-	CHECK(compare(one1, zero1) == ResultOfComparison::LeftSideGreater);
-	CHECK(compare(minusOne1, zero1) == ResultOfComparison::RightSideGreater);
-	CHECK(compare(minusOne1, one1) == ResultOfComparison::RightSideGreater);
-
-	CHECK(compare(zero1, zero2) == ResultOfComparison::Equal);
-	CHECK(compare(one1, one2) == ResultOfComparison::Equal);
-	CHECK(compare(minusOne1, minusOne2) == ResultOfComparison::Equal);
+	CHECK(compare(zero, zero) == ResultOfComparison::Equal);
+	CHECK(compare(one, one) == ResultOfComparison::Equal);
+	CHECK(compare(minusOne, minusOne) == ResultOfComparison::Equal);
 }
 
 TEST_CASE( "Basic negation tests", "[IntegerOperations.hpp]" ) {
@@ -102,4 +97,30 @@ TEST_CASE( "Basic division tests", "[IntegerOperations.hpp]" ) {
 	CHECK(equals(integerDivide(one, minusOne).second, zero));
 	CHECK(equals(integerDivide(minusOne, one).second, zero));
 	CHECK(equals(integerDivide(one, minusOne).second, zero));
+}
+
+TEST_CASE( "Basic min/max tests", "[IntegerOperations.hpp]" ) {
+	const auto zero = INTEGER_ZERO;
+	const auto one = INTEGER_ONE;
+	IntegerExchangeFormat minusOne({static_cast<unsigned>(-1)});
+
+	CHECK(equals(max(minusOne, minusOne), minusOne));
+	CHECK(equals(max(minusOne, zero), zero));
+	CHECK(equals(max(minusOne, one), one));
+	CHECK(equals(max(zero, minusOne), zero));
+	CHECK(equals(max(zero, zero), zero));
+	CHECK(equals(max(zero, one), one));
+	CHECK(equals(max(one, minusOne), one));
+	CHECK(equals(max(one, zero), one));
+	CHECK(equals(max(one, one), one));
+
+	CHECK(equals(min(minusOne, minusOne), minusOne));
+	CHECK(equals(min(minusOne, zero), minusOne));
+	CHECK(equals(min(minusOne, one), minusOne));
+	CHECK(equals(min(zero, minusOne), minusOne));
+	CHECK(equals(min(zero, zero), zero));
+	CHECK(equals(min(zero, one), zero));
+	CHECK(equals(min(one, minusOne), minusOne));
+	CHECK(equals(min(one, zero), zero));
+	CHECK(equals(min(one, one), one));
 }
