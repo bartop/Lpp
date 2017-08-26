@@ -9,7 +9,7 @@
 
 using namespace Lpp;
 
-TEST_CASE( "Comparisons tests for single numbers in integers", "[IntegerOperations.hpp]" ) {
+TEST_CASE( "Comparisons tests", "[IntegerOperations.hpp]" ) {
 	const auto zero = INTEGER_ZERO;
 	const auto one = INTEGER_ONE;
 	IntegerExchangeFormat minusOne({static_cast<unsigned>(-1)});
@@ -33,6 +33,29 @@ TEST_CASE( "Comparisons tests for single numbers in integers", "[IntegerOperatio
 	CHECK(compare(zero, zero) == ResultOfComparison::Equal);
 	CHECK(compare(one, one) == ResultOfComparison::Equal);
 	CHECK(compare(minusOne, minusOne) == ResultOfComparison::Equal);
+
+	IntegerExchangeFormat hundred({100});
+	IntegerExchangeFormat bigNumber({1000, 1});
+	IntegerExchangeFormat biggerNumber({1000, 2});
+	IntegerExchangeFormat smallNumber({1000, static_cast<unsigned>(-1)});
+	IntegerExchangeFormat hugeNumber({1000, 2, 1});
+
+	CHECK(equals(hundred, hundred));
+	CHECK(equals(bigNumber, bigNumber));
+	CHECK(equals(biggerNumber, biggerNumber));
+	CHECK(equals(hugeNumber, hugeNumber));
+	CHECK(equals(smallNumber, smallNumber));
+
+	CHECK(!equals(bigNumber, biggerNumber));
+	CHECK(!equals(bigNumber, hundred));
+	CHECK(!equals(bigNumber, smallNumber));
+
+	CHECK(compare(bigNumber, biggerNumber) == ResultOfComparison::RightSideGreater);
+	CHECK(compare(hugeNumber, smallNumber) == ResultOfComparison::LeftSideGreater);
+	CHECK(compare(bigNumber, hundred) == ResultOfComparison::LeftSideGreater);
+	CHECK(compare(hugeNumber, zero) == ResultOfComparison::LeftSideGreater);
+	CHECK(compare(smallNumber, minusOne) == ResultOfComparison::RightSideGreater);
+	CHECK(compare(smallNumber, bigNumber) == ResultOfComparison::RightSideGreater);
 }
 
 TEST_CASE( "Basic negation tests", "[IntegerOperations.hpp]" ) {

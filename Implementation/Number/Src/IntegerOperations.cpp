@@ -24,7 +24,7 @@ unsigned low(unsigned x) {
 	return ((1L << (std::numeric_limits<unsigned>::digits / 2)) - 1) & x;
 }
 
-//this is magic that should be implemented in assembly
+//<TODO type="performance" severity="medium" reason="This magic should be implemented in assembly">
 inline
 std::pair<unsigned, unsigned> multiply(unsigned a, unsigned b) {
 	unsigned s0, s1, s2, s3;
@@ -48,6 +48,7 @@ std::pair<unsigned, unsigned> multiply(unsigned a, unsigned b) {
 		s3 << (std::numeric_limits<unsigned>::digits / 2) | s2
 	);
 }
+//</TODO>
 
 constexpr inline
 std::pair<unsigned, unsigned> addWithCarry(
@@ -171,7 +172,7 @@ std::pair<IntegerExchangeFormat,
 ){
 	const auto divisor = _rhs;
 	auto comparisonResult = compare(_lhs, divisor);
-	//<TODO id="1" reason="Readability issues - code should be self explaining" severity="minor">
+	//<TODO type="code style" severity="minor" reason="Readability issues - code should be self explaining">
 	//FIXME - problem with IntegerExchangeFormat immutability
 	//this forces me to use strange tricks with this stack
 	//hold on to your butts ;-)
@@ -253,7 +254,7 @@ IntegerExchangeFormat multiply(
 		);
 		result = addVectors(result, partialResult);
 	}
-	//<TODO id="2" reason="This check should not ever happen. There must be a way to omit it" severity="minor">
+	//<TODO type="code style" severity="minor" reason="This check should not ever happen. There must be a way to omit it">
 	if(result.empty())
 		result.push_back(0);
 	//</TODO>
