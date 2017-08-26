@@ -189,8 +189,10 @@ std::pair<IntegerExchangeFormat,
 	//this forces me to use strange tricks with this stack
 	//hold on to your butts ;-)
 	std::stack<IntegerExchangeFormat> cache;
+	//</TODO>
 	cache.push(INTEGER_ZERO);
 	cache.push(_lhs);
+	//<TODO type="performance" severity="critical" reason="This algorithm needs optimization - it is very slow implementation">
 	while(comparisonResult != ResultOfComparison::RightSideGreater){
 		const auto dividend = subtract(cache.top(), divisor);
 		cache.pop();
@@ -200,11 +202,33 @@ std::pair<IntegerExchangeFormat,
 		cache.push(dividend);
 		comparisonResult = compare(dividend, divisor);
 	}
+	//</TODO>
 	const auto remainder = cache.top();
 	cache.pop();
 	const auto quotient = cache.top();
-	//</TODO>
 	return std::make_pair(quotient, remainder);
+}
+
+IntegerExchangeFormat unsignedMultiply(
+	const IntegerExchangeFormat &_lhs,
+	const IntegerExchangeFormat &_rhs
+){
+	std::vector<unsigned> result;
+	//<TODO type="performance" severity="high" reason="This algorithm needs optimization - it is the simplest implementation">
+	for(unsigned i = 0; i < _rhs.longInteger.size(); ++i){
+		const auto partialResult = multiplyWithShiftByNumber(
+			_lhs.longInteger,
+			_rhs.longInteger.at(i),
+			i
+		);
+		result = addVectors(result, partialResult);
+	}
+	//</TODO>
+	//<TODO type="code style" severity="minor" reason="This check should not ever happen. There must be a way to omit it">
+	if(result.empty())
+		result.push_back(0);
+	//</TODO>
+	return result;
 }
 
 }
@@ -257,20 +281,18 @@ IntegerExchangeFormat multiply(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
 ){
-	std::vector<unsigned> result;
-	for(unsigned i = 0; i < _rhs.longInteger.size(); ++i){
-		const auto partialResult = multiplyWithShiftByNumber(
-			_lhs.longInteger,
-			_rhs.longInteger.at(i),
-			i
+	if(getSign(_lhs.longInteger) == getSign(_rhs.longInteger))
+		return unsignedMultiply(
+			absoluteValue(_lhs),
+			absoluteValue(_rhs)
 		);
-		result = addVectors(result, partialResult);
-	}
-	//<TODO type="code style" severity="minor" reason="This check should not ever happen. There must be a way to omit it">
-	if(result.empty())
-		result.push_back(0);
-	//</TODO>
-	return result;
+	else
+		return negate(
+			unsignedMultiply(
+				absoluteValue(_lhs),
+				absoluteValue(_rhs)
+			)
+		);
 }
 
 std::pair<const IntegerExchangeFormat,
