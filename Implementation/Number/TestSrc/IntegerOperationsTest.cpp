@@ -61,3 +61,15 @@ TEST_CASE( "Basic add tests", "[IntegerOperations.hpp]" ) {
 
 	CHECK(equals(add(one, minusOne), add(minusOne, one)));
 }
+
+TEST_CASE( "Basic multiplication tests", "[IntegerOperations.hpp]" ) {
+	const auto zero = INTEGER_ZERO;
+	const auto one = INTEGER_ONE;
+	IntegerExchangeFormat minusOne({static_cast<unsigned>(-1)});
+
+	CHECK(equals(multiply(one, minusOne), minusOne));
+	CHECK(equals(multiply(one, zero), zero));
+	CHECK(equals(multiply(minusOne, zero), zero));
+
+	CHECK(equals(multiply(one, minusOne), multiply(minusOne, one)));
+}

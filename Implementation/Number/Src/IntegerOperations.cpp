@@ -139,6 +139,7 @@ std::vector<unsigned> addVectors(
 	return removeUnusedBytes(result);
 }
 
+
 std::vector<unsigned> multiplyWithShiftByNumber(
 	const std::vector<unsigned> &_lhs,
 	unsigned _rhs,
@@ -149,8 +150,11 @@ std::vector<unsigned> multiplyWithShiftByNumber(
 		const auto multiplyResult  = multiply(_rhs, _lhs[i]);
 		const auto addResult = addWithCarry(multiplyResult.first, result[i + _shift], 0);
 		result[i + _shift] = addResult.first;
-		result[i + 1 + _shift] = multiplyResult.second + addResult.second;
+		result[i + _shift + 1] = multiplyResult.second + addResult.second;
 	}
+
+	while(result[result.size() - 1] == 0)
+		result.pop_back();
 
 	return result;
 }
@@ -162,7 +166,8 @@ std::pair<IntegerExchangeFormat,
 ){
 	const auto divisor = _rhs;
 	auto comparisonResult = compare(_lhs, divisor);
-	//todo fixme - problem with IntegerExchangeFormat immutability
+	//<TODO id="1" reason="Readability issues - code should be self explaining" severity="minor">
+	//FIXME - problem with IntegerExchangeFormat immutability
 	//this forces me to use strange tricks with this stack
 	//hold on to your butts ;-)
 	std::stack<IntegerExchangeFormat> cache;
@@ -180,6 +185,7 @@ std::pair<IntegerExchangeFormat,
 	const auto remainder = cache.top();
 	cache.pop();
 	const auto quotient = cache.top();
+	//</TODO>
 	return std::make_pair(quotient, remainder);
 }
 
@@ -241,6 +247,10 @@ IntegerExchangeFormat multiply(
 		);
 		result = addVectors(result, partialResult);
 	}
+	//<TODO id="2" reason="This check should not ever happen. There must be a way to omit it" severity="minor">
+	if(result.empty())
+		result.push_back(0);
+	//</TODO>
 	return result;
 }
 
