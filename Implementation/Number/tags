@@ -1,0 +1,81 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BasicComplex	./Src/BasicComplex.cpp	/^BasicComplex::BasicComplex(Shared<const RealNumber> _realPart,$/;"	f	class:Lpp::BasicComplex
+BasicInt	./Src/BasicInt.cpp	/^BasicInt::BasicInt(int _int) : m_int(_int){}$/;"	f	class:Lpp::BasicInt
+BigInteger	./Src/BigInteger.cpp	/^BigInteger::BigInteger(const std::vector<unsigned> &_longInt)$/;"	f	class:Lpp::BigInteger
+CATCH_CONFIG_MAIN	./TestSrc/IntegerOperationsTest.cpp	/^#define CATCH_CONFIG_MAIN$/;"	d	file:
+CATCH_CONFIG_MAIN	./TestSrc/NumberOperationsTest.cpp	/^#define CATCH_CONFIG_MAIN$/;"	d	file:
+CATCH_CONFIG_MAIN	./TestSrc/RealNumberOperationsTest.cpp	/^#define CATCH_CONFIG_MAIN$/;"	d	file:
+IntegerFromReal	./Src/IntegerFromReal.cpp	/^IntegerFromReal::IntegerFromReal(Shared<RealNumber> _real)$/;"	f	class:Lpp::IntegerFromReal
+IntegerSum	./Src/IntegerSum.cpp	/^IntegerSum::IntegerSum(Shared<Integer> _lhs, Shared<Integer> _rhs)$/;"	f	class:Lpp::IntegerSum
+Lpp	./Src/BasicComplex.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/BasicInt.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/BigInteger.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/Integer.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/IntegerExchangeFormat.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/IntegerFromReal.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/IntegerOperations.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/IntegerSum.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/Number.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/NumberExchangeFormat.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/NumberOperations.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/RealNumber.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/RealNumberExchangeFormat.cpp	/^namespace Lpp{$/;"	n	file:
+Lpp	./Src/RealNumberOperations.cpp	/^namespace Lpp{$/;"	n	file:
+NEGATIVE_SIGN_MEANINGLESS_VALUE	./Src/IntegerOperations.cpp	/^const unsigned NEGATIVE_SIGN_MEANINGLESS_VALUE = std::numeric_limits<unsigned>::max();$/;"	m	namespace:Lpp::__anon1	file:
+NumberExchangeFormat	./Src/NumberExchangeFormat.cpp	/^NumberExchangeFormat::NumberExchangeFormat($/;"	f	class:Lpp::NumberExchangeFormat
+POSITIVE_SIGN_MEANINGLESS_VALUE	./Src/IntegerOperations.cpp	/^const unsigned POSITIVE_SIGN_MEANINGLESS_VALUE = std::numeric_limits<unsigned>::min();$/;"	m	namespace:Lpp::__anon1	file:
+RealNumberExchangeFormat	./Src/RealNumberExchangeFormat.cpp	/^RealNumberExchangeFormat::RealNumberExchangeFormat($/;"	f	class:Lpp::RealNumberExchangeFormat
+absoluteValue	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat absoluteValue($/;"	f	namespace:Lpp
+add	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat add($/;"	f	namespace:Lpp
+add	./Src/NumberOperations.cpp	/^NumberExchangeFormat add($/;"	f	namespace:Lpp
+add	./Src/RealNumberOperations.cpp	/^RealNumberExchangeFormat add($/;"	f	namespace:Lpp
+addVectors	./Src/IntegerOperations.cpp	/^std::vector<unsigned> addVectors($/;"	f	namespace:Lpp::__anon1
+commonSignFormat	./Src/RealNumberOperations.cpp	/^RealNumberExchangeFormat commonSignFormat($/;"	f	namespace:Lpp::__anon2
+compare	./Src/IntegerOperations.cpp	/^ResultOfComparison compare($/;"	f	namespace:Lpp
+compare	./Src/RealNumber.cpp	/^ResultOfComparison RealNumber::compare(Shared<const RealNumber> _realNumber) const{$/;"	f	class:Lpp::RealNumber
+compare	./Src/RealNumberOperations.cpp	/^ResultOfComparison compare($/;"	f	namespace:Lpp
+countGCD	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat countGCD($/;"	f	namespace:Lpp
+countLCM	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat countLCM($/;"	f	namespace:Lpp
+countUnsignedGCD	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat countUnsignedGCD($/;"	f	namespace:Lpp::__anon1
+divide	./Src/NumberOperations.cpp	/^NumberExchangeFormat divide($/;"	f	namespace:Lpp
+divide	./Src/RealNumberOperations.cpp	/^RealNumberExchangeFormat divide($/;"	f	namespace:Lpp
+equals	./Src/IntegerOperations.cpp	/^bool equals($/;"	f	namespace:Lpp
+equals	./Src/Number.cpp	/^bool Number::equals($/;"	f	class:Lpp::Number
+equals	./Src/NumberOperations.cpp	/^bool equals($/;"	f	namespace:Lpp
+equals	./Src/RealNumberOperations.cpp	/^bool equals($/;"	f	namespace:Lpp
+getSign	./Src/IntegerOperations.cpp	/^unsigned getSign(const std::vector<unsigned> &_vector){$/;"	f	namespace:Lpp::__anon1
+high	./Src/IntegerOperations.cpp	/^unsigned high(unsigned x) {$/;"	f	namespace:Lpp::__anon1
+integerDivide	./Src/IntegerOperations.cpp	/^> integerDivide($/;"	f	namespace:Lpp
+integerValue	./Src/BasicInt.cpp	/^IntegerExchangeFormat BasicInt::integerValue() const{$/;"	f	class:Lpp::BasicInt
+integerValue	./Src/BigInteger.cpp	/^IntegerExchangeFormat BigInteger::integerValue() const{$/;"	f	class:Lpp::BigInteger
+integerValue	./Src/IntegerFromReal.cpp	/^IntegerExchangeFormat IntegerFromReal::integerValue() const {$/;"	f	class:Lpp::IntegerFromReal
+integerValue	./Src/IntegerSum.cpp	/^IntegerExchangeFormat IntegerSum::integerValue() const {$/;"	f	class:Lpp::IntegerSum
+isNegative	./Src/IntegerOperations.cpp	/^bool isNegative($/;"	f	namespace:Lpp
+isNegative	./Src/RealNumberOperations.cpp	/^bool isNegative($/;"	f	namespace:Lpp
+longInteger	./Src/IntegerExchangeFormat.cpp	/^) noexcept : longInteger(_longInteger){}$/;"	f	namespace:Lpp
+low	./Src/IntegerOperations.cpp	/^unsigned low(unsigned x) {$/;"	f	namespace:Lpp::__anon1
+max	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat max($/;"	f	namespace:Lpp
+min	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat min($/;"	f	namespace:Lpp
+multiply	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat multiply($/;"	f	namespace:Lpp
+multiply	./Src/IntegerOperations.cpp	/^std::pair<unsigned, unsigned> multiply(unsigned a, unsigned b) {$/;"	f	namespace:Lpp::__anon1
+multiply	./Src/NumberOperations.cpp	/^NumberExchangeFormat multiply($/;"	f	namespace:Lpp
+multiply	./Src/RealNumberOperations.cpp	/^RealNumberExchangeFormat multiply($/;"	f	namespace:Lpp
+multiplyWithShiftByNumber	./Src/IntegerOperations.cpp	/^std::vector<unsigned> multiplyWithShiftByNumber($/;"	f	namespace:Lpp::__anon1
+negate	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat negate($/;"	f	namespace:Lpp
+negate	./Src/RealNumberOperations.cpp	/^RealNumberExchangeFormat negate($/;"	f	namespace:Lpp
+numberValue	./Src/BasicComplex.cpp	/^NumberExchangeFormat BasicComplex::numberValue() const{$/;"	f	class:Lpp::BasicComplex
+numberValue	./Src/RealNumber.cpp	/^NumberExchangeFormat RealNumber::numberValue() const{$/;"	f	class:Lpp::RealNumber
+overflowedNegative	./Src/IntegerOperations.cpp	/^bool overflowedNegative($/;"	f	namespace:Lpp::__anon1
+overflowedPositive	./Src/IntegerOperations.cpp	/^bool overflowedPositive($/;"	f	namespace:Lpp::__anon1
+realValue	./Src/Integer.cpp	/^Integer::realValue() const{$/;"	f	class:Lpp::Integer
+simplify	./Src/RealNumberOperations.cpp	/^RealNumberExchangeFormat simplify($/;"	f	namespace:Lpp
+sum	./Src/IntegerSum.cpp	/^Unique<IntegerSum> sum($/;"	f	namespace:Lpp
+toCommonDenominator	./Src/RealNumberOperations.cpp	/^> toCommonDenominator($/;"	f	namespace:Lpp
+toInteger	./Src/IntegerFromReal.cpp	/^Unique<IntegerFromReal> toInteger($/;"	f	namespace:Lpp
+unsignedDivide	./Src/IntegerOperations.cpp	/^	IntegerExchangeFormat> unsignedDivide($/;"	f	namespace:Lpp::__anon1
+unsignedMultiply	./Src/IntegerOperations.cpp	/^IntegerExchangeFormat unsignedMultiply($/;"	f	namespace:Lpp::__anon1

@@ -42,14 +42,24 @@ NumberExchangeFormat divide(
 	const NumberExchangeFormat &_lhs,
 	const NumberExchangeFormat &_rhs
 ){
+	const auto denominator = add(
+		multiply(_rhs.imaginaryPart, _rhs.imaginaryPart),
+		multiply(_rhs.realPart, _rhs.realPart)
+	);
 	return NumberExchangeFormat(
-		subtract(
-			multiply(_lhs.realPart, _rhs.realPart),
-			multiply(_lhs.imaginaryPart, _rhs.imaginaryPart)
+		divide(
+			subtract(
+				multiply(_lhs.realPart, _rhs.realPart),
+				multiply(_lhs.imaginaryPart, negate(_rhs.imaginaryPart))
+			),
+			denominator
 		),
-		add(
-			multiply(_lhs.imaginaryPart, _rhs.realPart),
-			multiply(_lhs.realPart, _rhs.imaginaryPart)
+		divide(
+			add(
+				multiply(_lhs.imaginaryPart, _rhs.realPart),
+				multiply(_lhs.realPart, negate(_rhs.imaginaryPart))
+			),
+			denominator
 		)
 	);
 }
