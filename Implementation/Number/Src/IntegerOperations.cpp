@@ -184,29 +184,16 @@ std::pair<IntegerExchangeFormat,
 ){
 	const auto divisor = _rhs;
 	auto comparisonResult = compare(_lhs, divisor);
-	//<TODO type="code style" severity="minor" reason="Readability issues - code should be self explaining">
-	//FIXME - problem with IntegerExchangeFormat immutability
-	//this forces me to use strange tricks with this stack
-	//hold on to your butts ;-)
-	std::stack<IntegerExchangeFormat> cache;
-	//</TODO>
-	cache.push(INTEGER_ZERO);
-	cache.push(_lhs);
+	auto dividend = _lhs.longInteger;
+	auto result = INTEGER_ZERO.longInteger;
 	//<TODO type="performance" severity="critical" reason="This algorithm needs optimization - it is very slow implementation">
 	while(comparisonResult != ResultOfComparison::RightSideGreater){
-		const auto dividend = subtract(cache.top(), divisor);
-		cache.pop();
-		const auto result = add(cache.top(), INTEGER_ONE);
-		cache.pop();
-		cache.push(result);
-		cache.push(dividend);
+		dividend = subtract(IntegerExchangeFormat(dividend), divisor).longInteger;
+		result = addVectors(result, INTEGER_ONE.longInteger);
 		comparisonResult = compare(dividend, divisor);
 	}
 	//</TODO>
-	const auto remainder = cache.top();
-	cache.pop();
-	const auto quotient = cache.top();
-	return std::make_pair(quotient, remainder);
+	return std::make_pair(result, dividend);
 }
 
 IntegerExchangeFormat unsignedMultiply(
