@@ -6,8 +6,8 @@
 namespace Lpp{
 
 std::pair<
-	const RealNumberExchangeFormat,
-	const RealNumberExchangeFormat
+	RealNumberExchangeFormat,
+	RealNumberExchangeFormat
 > toCommonDenominator(
 	const RealNumberExchangeFormat &_lhs,
 	const RealNumberExchangeFormat &_rhs
@@ -16,8 +16,8 @@ std::pair<
 		return std::make_pair(_lhs, _rhs);
 	else{
 		const auto lcm = countLCM(_lhs.denominator, _rhs.denominator);
-		const auto leftExtension = integerDivide(lcm, _rhs.denominator).first;
-		const auto rightExtension = integerDivide(lcm, _lhs.denominator).first;
+		const auto rightExtension = integerDivide(lcm, _rhs.denominator).first;
+		const auto leftExtension = integerDivide(lcm, _lhs.denominator).first;
 		return std::make_pair(
 			RealNumberExchangeFormat(
 				multiply(_lhs.numerator, leftExtension),
@@ -31,7 +31,7 @@ std::pair<
 	}
 }
 
-const RealNumberExchangeFormat simplify(
+RealNumberExchangeFormat simplify(
 	const RealNumberExchangeFormat &_realNumber
 ){
 	const auto numerator = _realNumber.numerator;
@@ -67,7 +67,7 @@ ResultOfComparison compare(
 	);
 }
 
-const RealNumberExchangeFormat add(
+RealNumberExchangeFormat add(
 	const RealNumberExchangeFormat &_lhs,
 	const RealNumberExchangeFormat &_rhs
 ){
@@ -77,6 +77,26 @@ const RealNumberExchangeFormat add(
 	return RealNumberExchangeFormat(
 		add(left.numerator, right.numerator),
 		left.denominator
+	);
+}
+
+RealNumberExchangeFormat multiply(
+	const RealNumberExchangeFormat &_lhs,
+	const RealNumberExchangeFormat &_rhs
+){
+	return RealNumberExchangeFormat(
+		multiply(_lhs.numerator, _rhs.numerator),
+		multiply(_lhs.denominator, _rhs.denominator)
+	);
+}
+
+RealNumberExchangeFormat divide(
+	const RealNumberExchangeFormat &_lhs,
+	const RealNumberExchangeFormat &_rhs
+){
+	return RealNumberExchangeFormat(
+		multiply(_lhs.numerator, _rhs.denominator),
+		multiply(_lhs.denominator, _rhs.numerator)
 	);
 }
 

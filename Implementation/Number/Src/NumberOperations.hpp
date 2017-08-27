@@ -11,17 +11,17 @@ bool equals(
 	const NumberExchangeFormat &_rhs
 );
 
-const NumberExchangeFormat add(
+NumberExchangeFormat add(
 	const NumberExchangeFormat &_lhs,
 	const NumberExchangeFormat &_rhs
 );
 
-const NumberExchangeFormat multiply(
+NumberExchangeFormat multiply(
 	const NumberExchangeFormat &_lhs,
 	const NumberExchangeFormat &_rhs
 );
 
-const NumberExchangeFormat divide(
+NumberExchangeFormat divide(
 	const NumberExchangeFormat &_lhs,
 	const NumberExchangeFormat &_rhs
 );

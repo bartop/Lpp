@@ -9,8 +9,8 @@ namespace Lpp{
 
 
 std::pair<
-	const RealNumberExchangeFormat,
-	const RealNumberExchangeFormat
+	RealNumberExchangeFormat,
+	RealNumberExchangeFormat
 > toCommonDenominator(
 	const RealNumberExchangeFormat &_lhs,
 	const RealNumberExchangeFormat &_rhs
@@ -21,11 +21,11 @@ ResultOfComparison compare(
 	const RealNumberExchangeFormat &_rhs
 );
 
-const RealNumberExchangeFormat simplify(
+RealNumberExchangeFormat simplify(
 	const RealNumberExchangeFormat &_realNumber
 );
 
-const RealNumberExchangeFormat negate(
+RealNumberExchangeFormat negate(
 	const RealNumberExchangeFormat &_realNumber
 );
 
@@ -34,12 +34,17 @@ bool equals(
 	const RealNumberExchangeFormat &_rhs
 );
 
-const RealNumberExchangeFormat add(
+RealNumberExchangeFormat add(
 	const RealNumberExchangeFormat &_lhs,
 	const RealNumberExchangeFormat &_rhs
 );
 
-const RealNumberExchangeFormat multiply(
+RealNumberExchangeFormat multiply(
+	const RealNumberExchangeFormat &_lhs,
+	const RealNumberExchangeFormat &_rhs
+);
+
+RealNumberExchangeFormat divide(
 	const RealNumberExchangeFormat &_lhs,
 	const RealNumberExchangeFormat &_rhs
 );
