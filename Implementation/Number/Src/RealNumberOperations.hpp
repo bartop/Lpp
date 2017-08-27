@@ -16,13 +16,17 @@ std::pair<
 	const RealNumberExchangeFormat &_rhs
 );
 
-ResultOfComparison compare(
-	const RealNumberExchangeFormat &_lhs,
-	const RealNumberExchangeFormat &_rhs
+bool isNegative(
+	const RealNumberExchangeFormat &_num
 );
 
 RealNumberExchangeFormat simplify(
 	const RealNumberExchangeFormat &_realNumber
+);
+
+ResultOfComparison compare(
+	const RealNumberExchangeFormat &_lhs,
+	const RealNumberExchangeFormat &_rhs
 );
 
 RealNumberExchangeFormat negate(

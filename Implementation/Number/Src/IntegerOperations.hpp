@@ -13,6 +13,10 @@ bool equals(
 	const IntegerExchangeFormat &_rhs
 );
 
+bool isNegative(
+	const IntegerExchangeFormat &_number
+);
+
 ResultOfComparison compare(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs

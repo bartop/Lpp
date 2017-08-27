@@ -5,6 +5,29 @@
 
 namespace Lpp{
 
+namespace{
+
+inline
+RealNumberExchangeFormat commonSignFormat(
+	const RealNumberExchangeFormat &_num
+){
+	if(isNegative(_num.denominator))
+		return RealNumberExchangeFormat(
+			negate(_num.numerator),
+			negate(_num.denominator)
+		);
+	else
+		return _num;
+}
+
+}
+
+bool isNegative(
+	const RealNumberExchangeFormat &_num
+){
+	return isNegative(_num.numerator) != isNegative(_num.denominator);
+}
+
 std::pair<
 	RealNumberExchangeFormat,
 	RealNumberExchangeFormat
@@ -34,11 +57,12 @@ std::pair<
 RealNumberExchangeFormat simplify(
 	const RealNumberExchangeFormat &_realNumber
 ){
-	const auto numerator = _realNumber.numerator;
-	const auto denominator = _realNumber.denominator;
+	const auto num = commonSignFormat(_realNumber);
+	const auto numerator = num.numerator;
+	const auto denominator = num.denominator;
 	const auto gcd = countGCD(numerator, denominator);
 	if(equals(gcd, INTEGER_ONE))
-		return _realNumber;
+		return num;
 
 	return RealNumberExchangeFormat(
 		integerDivide(numerator, gcd).first,
@@ -46,6 +70,14 @@ RealNumberExchangeFormat simplify(
 	);
 }
 
+RealNumberExchangeFormat negate(
+	const RealNumberExchangeFormat &_realNumber
+){
+	return RealNumberExchangeFormat(
+		negate(_realNumber.numerator),
+		_realNumber.denominator
+	);
+}
 bool equals(
 	const RealNumberExchangeFormat &_lhs,
 	const RealNumberExchangeFormat &_rhs

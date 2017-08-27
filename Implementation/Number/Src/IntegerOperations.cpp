@@ -231,6 +231,27 @@ IntegerExchangeFormat unsignedMultiply(
 	return result;
 }
 
+IntegerExchangeFormat countUnsignedGCD(
+	const IntegerExchangeFormat &_lhs,
+	const IntegerExchangeFormat &_rhs
+){
+	const auto dividend = max(_lhs, _rhs);
+	const auto divisor = min(_lhs, _rhs);
+	if(equals(divisor, INTEGER_ZERO))
+		return dividend;
+	else
+		return countGCD(
+			divisor,
+			integerDivide(dividend, divisor).second
+		);
+}
+
+}
+
+bool isNegative(
+	const IntegerExchangeFormat &_number
+){
+	return getSign(_number.longInteger) != 0;
 }
 
 bool equals(
@@ -345,25 +366,18 @@ IntegerExchangeFormat countGCD(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
 ){
-	const auto dividend = max(_lhs, _rhs);
-	const auto divisor = min(_lhs, _rhs);
-	if(equals(divisor, INTEGER_ZERO))
-		return dividend;
-	else
-		return countGCD(
-			divisor,
-			integerDivide(dividend, divisor).second
-		);
+	const auto absLeft = absoluteValue(_lhs);
+	const auto absRight = absoluteValue(_rhs);
+	return countUnsignedGCD(absLeft, absRight);
 }
 
 IntegerExchangeFormat countLCM(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
 ){
-	const auto gcd = countGCD(_lhs, _rhs);
 	return integerDivide(
 			multiply(_lhs, _rhs),
-			gcd
+			countGCD(_lhs, _rhs)
 	).first;
 }
 
