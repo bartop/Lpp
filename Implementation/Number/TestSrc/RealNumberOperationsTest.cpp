@@ -3,6 +3,7 @@
 
 #define CATCH_CONFIG_MAIN
 #include "../Src/RealNumberOperations.hpp"
+#include "../Src/IntegerOperations.hpp"
 
 #include "../../Config/Src/config.hpp"
 
@@ -48,10 +49,23 @@ TEST_CASE( "RealNumberOperations tests", "[RealNumberOperations.hpp]" ) {
 		CHECK(compare(fourFifths, fourSixths) == ResultOfComparison::LeftSideGreater);
 		CHECK(compare(sixFifths, fourSixths) == ResultOfComparison::LeftSideGreater);
 		CHECK(compare(fourTwelths, fiveSixths) == ResultOfComparison::RightSideGreater);
+		CHECK(
+			equals(
+				RealNumberExchangeFormat(
+					negate(IntegerExchangeFormat({61})),
+					IntegerExchangeFormat({30})
+				),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({61}),
+					negate(IntegerExchangeFormat({30}))
+				)
+			)
+		);
 	}
 
 	SECTION("Addition tests"){
 		CHECK(equals(add(fourTwelths, fourTwelths), fourSixths));
+		CHECK(equals(add(negate(fourTwelths), negate(fourTwelths)), negate(fourSixths)));
 		CHECK(equals(add(fiveTwelths, fiveTwelths), fiveSixths));
 		CHECK(equals(add(twoTwelths, fourTwelths), sixTwelths));
 		CHECK(equals(add(twoTwelths, twoTwelths), fourTwelths));
@@ -86,5 +100,100 @@ TEST_CASE( "RealNumberOperations tests", "[RealNumberOperations.hpp]" ) {
 				)
 			)
 		);
+		CHECK(
+			equals(
+				add(negate(sixFifths), fiveSixths),
+				RealNumberExchangeFormat(
+					negate(IntegerExchangeFormat({11})),
+					IntegerExchangeFormat({30})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				add(sixFifths, negate(fiveSixths)),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({11}),
+					IntegerExchangeFormat({30})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				add(negate(fourFifths), fiveSixths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({1}),
+					IntegerExchangeFormat({30})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				add(fourFifths, negate(fiveSixths)),
+				RealNumberExchangeFormat(
+					negate(IntegerExchangeFormat({1})),
+					IntegerExchangeFormat({30})
+				)
+			)
+		);
+	}
+
+	SECTION("Multiplication tests"){
+		CHECK(
+			equals(
+				multiply(fiveFourths, fiveSixths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({25}),
+					IntegerExchangeFormat({24})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				multiply(fourFifths, fiveSixths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({20}),
+					IntegerExchangeFormat({30})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				multiply(fourTwelths, half),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({4}),
+					IntegerExchangeFormat({24})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				multiply(sixFourths, fiveSixths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({5}),
+					IntegerExchangeFormat({4})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				multiply(twoTwelths, fourFifths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({8}),
+					IntegerExchangeFormat({60})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				multiply(REAL_ZERO, fourFifths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({0}),
+					IntegerExchangeFormat({60})
+				)
+			)
+		);
+	}
+	SECTION("Multiplication tests"){
 	}
 }

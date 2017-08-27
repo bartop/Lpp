@@ -59,6 +59,14 @@ TEST_CASE( "IntegerOperations tests", "[IntegerOperations.hpp]" ) {
 		CHECK(compare(minusBigNumber, bigNumber) == ResultOfComparison::RightSideGreater);
 	}
 
+	SECTION("Sign tests") {
+		CHECK(!isNegative(one));
+		CHECK(!isNegative(zero));
+		CHECK(isNegative(minusOne));
+		CHECK(!isNegative(bigNumber));
+		CHECK(!isNegative(biggerNumber));
+	}
+
 	SECTION("Negation tests") {
 		IntegerExchangeFormat smallerNumber({0xFFFFFC00, 0xFFFFFFFD});
 		CHECK(equals(negate(one), minusOne));
