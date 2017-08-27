@@ -40,10 +40,12 @@ IntegerExchangeFormat multiply(
 	const IntegerExchangeFormat &_rhs
 );
 
-std::pair<const IntegerExchangeFormat,
-	const IntegerExchangeFormat> integerDivide(
-		const IntegerExchangeFormat &_lhs,
-		const IntegerExchangeFormat &_rhs
+std::pair<
+	IntegerExchangeFormat,
+	IntegerExchangeFormat
+> integerDivide(
+	const IntegerExchangeFormat &_lhs,
+	const IntegerExchangeFormat &_rhs
 );
 
 IntegerExchangeFormat max(

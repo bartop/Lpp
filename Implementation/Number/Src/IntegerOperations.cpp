@@ -316,10 +316,12 @@ IntegerExchangeFormat multiply(
 		);
 }
 
-std::pair<const IntegerExchangeFormat,
-	const IntegerExchangeFormat> integerDivide(
-		const IntegerExchangeFormat &_lhs,
-		const IntegerExchangeFormat &_rhs
+std::pair<
+	IntegerExchangeFormat,
+	IntegerExchangeFormat
+> integerDivide(
+	const IntegerExchangeFormat &_lhs,
+	const IntegerExchangeFormat &_rhs
 ){
 	const auto unsignedResult = unsignedDivide(
 		absoluteValue(_lhs),

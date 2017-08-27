@@ -1,7 +1,6 @@
 
-
-
 #define CATCH_CONFIG_MAIN
+
 #include "../Src/RealNumberOperations.hpp"
 #include "../Src/IntegerOperations.hpp"
 
@@ -58,6 +57,36 @@ TEST_CASE( "RealNumberOperations tests", "[RealNumberOperations.hpp]" ) {
 				RealNumberExchangeFormat(
 					IntegerExchangeFormat({61}),
 					negate(IntegerExchangeFormat({30}))
+				)
+			)
+		);
+	}
+
+	SECTION("Sign tests"){
+		CHECK(!isNegative(fiveFifths));
+		CHECK(!isNegative(half));
+		CHECK(isNegative(negate(fourTwelths)));
+		CHECK(
+			!isNegative(
+				RealNumberExchangeFormat(
+					negate(IntegerExchangeFormat({61})),
+					negate(IntegerExchangeFormat({30}))
+				)
+			)
+		);
+		CHECK(
+			isNegative(
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({61}),
+					negate(IntegerExchangeFormat({30}))
+				)
+			)
+		);
+		CHECK(
+			isNegative(
+				RealNumberExchangeFormat(
+					negate(IntegerExchangeFormat({61})),
+					IntegerExchangeFormat({30})
 				)
 			)
 		);
@@ -194,6 +223,52 @@ TEST_CASE( "RealNumberOperations tests", "[RealNumberOperations.hpp]" ) {
 			)
 		);
 	}
-	SECTION("Multiplication tests"){
+
+	SECTION("Division tests"){
+		CHECK(
+			equals(
+				divide(fiveFourths, fiveSixths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({30}),
+					IntegerExchangeFormat({20})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				divide(fourFifths, fiveSixths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({24}),
+					IntegerExchangeFormat({25})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				divide(fourTwelths, half),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({8}),
+					IntegerExchangeFormat({12})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				divide(sixFourths, fiveSixths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({36}),
+					IntegerExchangeFormat({20})
+				)
+			)
+		);
+		CHECK(
+			equals(
+				divide(twoTwelths, fourFifths),
+				RealNumberExchangeFormat(
+					IntegerExchangeFormat({10}),
+					IntegerExchangeFormat({48})
+				)
+			)
+		);
 	}
 }
