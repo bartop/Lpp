@@ -157,7 +157,8 @@ TEST_CASE( "IntegerOperations tests", "[IntegerOperations.hpp]" ) {
 		CHECK(equals(integerDivide(smallNumPlusTen, bigNumber).first, zero));
 		CHECK(equals(integerDivide(threeTimesBigNum, bigNumber).first, three));
 		CHECK(equals(integerDivide(minusThreeTimesBigNumPlusThree, bigNumber).first, negate(two)));
-		//CHECK(equals(integerDivide(threeTimesBigNum, negate(three)).first, bigNumber));
+		CHECK(equals(integerDivide(threeTimesBigNum, negate(three)).first, negate(bigNumber)));
+		CHECK(equals(integerDivide(bigNumber, one).first, bigNumber));
 
 		CHECK(equals(integerDivide(one, one).second, zero));
 		CHECK(equals(integerDivide(zero, one).second, zero));
@@ -172,7 +173,8 @@ TEST_CASE( "IntegerOperations tests", "[IntegerOperations.hpp]" ) {
 		CHECK(equals(integerDivide(smallNumPlusTen, bigNumber).second, smallNumPlusTen));
 		CHECK(equals(integerDivide(threeTimesBigNum, bigNumber).second, zero));
 		CHECK(equals(integerDivide(minusThreeTimesBigNumPlusThree, bigNumber).second, add(minusBigNumber, three)));
-		//CHECK(equals(integerDivide(threeTimesBigNum, negate(three)).second, zero));
+		CHECK(equals(integerDivide(threeTimesBigNum, negate(three)).second, zero));
+		CHECK(equals(integerDivide(bigNumber, one).second, zero));
 		//<TODO type="tests" severity="high" reason="Add more tests in this category or even generate ones in python or so" />
 	}
 

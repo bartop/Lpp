@@ -7,12 +7,12 @@ namespace Lpp{
 
 class BigInteger final : public Integer {
 public:
-	BigInteger(const std::vector<unsigned> &_longInt);
+	BigInteger(const std::deque<unsigned> &_longInt);
 
 	IntegerExchangeFormat integerValue() const final override;
 
 private:
-	const std::vector<unsigned> m_longInteger;
+	const std::deque<unsigned> m_longInteger;
 };
 
 }

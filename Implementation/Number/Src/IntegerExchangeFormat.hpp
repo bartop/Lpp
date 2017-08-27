@@ -2,16 +2,16 @@
 #pragma once
 
 #include <memory>
-#include <vector>
+#include <deque>
 
 namespace Lpp{
 
 struct IntegerExchangeFormat final{
 	IntegerExchangeFormat(
-		const std::vector<unsigned> &_longInteger
+		const std::deque<unsigned> &_longInteger
 	) noexcept;
 
-	const std::vector<unsigned> longInteger;
+	const std::deque<unsigned> longInteger;
 };
 
 const IntegerExchangeFormat INTEGER_ZERO =

@@ -5,7 +5,7 @@
 #include <limits>
 #include <stack>
 #include <cassert>
-#include <vector>
+#include <deque>
 
 namespace Lpp{
 
@@ -77,63 +77,63 @@ unsigned getMsb(unsigned _number) noexcept {
 }
 
 inline
-unsigned getSign(const std::vector<unsigned> &_vector){
-	if (_vector.size() == 0)
+unsigned getSign(const std::deque<unsigned> &_deque){
+	if (_deque.size() == 0)
 		return POSITIVE_SIGN_MEANINGLESS_VALUE;
 	else
-		return getMsb(_vector.at(_vector.size() - 1)) ?
+		return getMsb(_deque.at(_deque.size() - 1)) ?
 			NEGATIVE_SIGN_MEANINGLESS_VALUE : POSITIVE_SIGN_MEANINGLESS_VALUE;
 }
 
 inline
 unsigned safeAt(
-	const std::vector<unsigned> &_vec,
+	const std::deque<unsigned> &_vec,
 	unsigned index
 ) noexcept {
 	return index >= _vec.size() ? getSign(_vec) : _vec.at(index);
 }
 
-bool hasRedundantElements(const std::vector<unsigned> &_vector) noexcept {
-	if(_vector.size() <= 1)
+bool hasRedundantElements(const std::deque<unsigned> &_deque) noexcept {
+	if(_deque.size() <= 1)
 		return false;
 
-	return (_vector.at(_vector.size() - 1) == getSign(_vector)) &&
-			getMsb(_vector.at(_vector.size() - 1)) ==
-				getMsb(_vector.at(_vector.size() - 2));
+	return (_deque.at(_deque.size() - 1) == getSign(_deque)) &&
+			getMsb(_deque.at(_deque.size() - 1)) ==
+				getMsb(_deque.at(_deque.size() - 2));
 }
 
 inline
-std::vector<unsigned> removeUnusedBytes(
-	std::vector<unsigned> _vector
+std::deque<unsigned> removeUnusedBytes(
+	std::deque<unsigned> _deque
 ) noexcept {
-	while(hasRedundantElements(_vector)){
-		_vector.pop_back();
+	while(hasRedundantElements(_deque)){
+		_deque.pop_back();
 	}
-	return _vector;
+	return _deque;
 }
 
 inline
 bool overflowedNegative(
-	const std::vector<unsigned> &_lhs,
-	const std::vector<unsigned> &_rhs,
-	const std::vector<unsigned> &_result
+	const std::deque<unsigned> &_lhs,
+	const std::deque<unsigned> &_rhs,
+	const std::deque<unsigned> &_result
 ){
 	return getSign(_lhs) && getSign(_rhs) && !getSign(_result);
 }
 
 inline
 bool overflowedPositive(
-	const std::vector<unsigned> &_lhs,
-	const std::vector<unsigned> &_rhs,
-	const std::vector<unsigned> &_result
+	const std::deque<unsigned> &_lhs,
+	const std::deque<unsigned> &_rhs,
+	const std::deque<unsigned> &_result
 ){
 	return !getSign(_lhs) && !getSign(_rhs) && getSign(_result);
 }
-std::vector<unsigned> addVectors(
-	const std::vector<unsigned> &_lhs,
-	const std::vector<unsigned> &_rhs
+std::deque<unsigned> addQueues(
+	const std::deque<unsigned> &_lhs,
+	const std::deque<unsigned> &_rhs
 ){
-	std::vector<unsigned> result;
+	std::deque<unsigned> result;
 	unsigned carry = 0;
 	unsigned i = 0;
 	while(i < std::max(_lhs.size(), _rhs.size())){
@@ -154,13 +154,22 @@ std::vector<unsigned> addVectors(
 	return removeUnusedBytes(result);
 }
 
+std::deque<unsigned> negateQueue(
+	const std::deque<unsigned> &_num
+){
+	std::deque<unsigned> result;
+	for(const auto &it : _num){
+		result.push_back(~it);
+	}
+	return addQueues(result, {1});
+}
 
-std::vector<unsigned> multiplyWithShiftByNumber(
-	const std::vector<unsigned> &_lhs,
+std::deque<unsigned> multiplyWithShiftByNumber(
+	const std::deque<unsigned> &_lhs,
 	unsigned _rhs,
 	unsigned _shift
 ){
-	std::vector<unsigned> result(_lhs.size() + _shift + 1);
+	std::deque<unsigned> result(_lhs.size() + _shift + 1);
 	for(unsigned i = 0; i < _lhs.size(); ++i){
 		const auto multiplyResult  = multiply(_rhs, _lhs[i]);
 		const auto addResult =
@@ -171,10 +180,24 @@ std::vector<unsigned> multiplyWithShiftByNumber(
 			multiplyResult.second + addResult.second;
 	}
 
-	while(result[result.size() - 1] == 0)
+	while(!result.empty() && result[result.size() - 1] == 0)
 		result.pop_back();
 
 	return result;
+}
+
+int compareDeque(
+		const std::deque<unsigned> &_lhs,
+		const std::deque<unsigned> &_rhs
+){
+	if(_lhs == _rhs)
+		return 0;
+
+	const auto result = addQueues(
+		_lhs,
+		negateQueue(_rhs)
+	);
+	return getSign(result) == 0 ? 1 : -1;
 }
 
 std::pair<IntegerExchangeFormat,
@@ -182,25 +205,45 @@ std::pair<IntegerExchangeFormat,
 		const IntegerExchangeFormat &_lhs,
 		const IntegerExchangeFormat &_rhs
 ){
-	const auto divisor = _rhs;
-	auto comparisonResult = compare(_lhs, divisor);
-	auto dividend = _lhs.longInteger;
-	auto result = INTEGER_ZERO.longInteger;
-	//<TODO type="performance" severity="critical" reason="This algorithm needs optimization - it is very slow implementation">
-	while(comparisonResult != ResultOfComparison::RightSideGreater){
-		dividend = subtract(IntegerExchangeFormat(dividend), divisor).longInteger;
-		result = addVectors(result, INTEGER_ONE.longInteger);
-		comparisonResult = compare(dividend, divisor);
+	const auto compare = [](const auto &_lhs, const auto &_rhs){
+		return static_cast<ResultOfComparison>(compareDeque(_lhs, _rhs));
+	};
+	const auto dividend = _lhs.longInteger;
+	const auto divisor = _rhs.longInteger;
+	unsigned testedPosition = dividend.size() - 1;
+	std::deque<unsigned> workingDividend;
+	std::deque<unsigned> result;
+	//this code is unreadable, but works quite good and efficientelly
+	for(unsigned i = 0; i <= testedPosition; ++i) {
+		workingDividend.push_front(dividend[testedPosition-i]);
+		result.push_front(0);
+		auto comparisonResult = compare(workingDividend, divisor);
+		while(comparisonResult != ResultOfComparison::RightSideGreater)
+		{
+			workingDividend = addQueues(
+				workingDividend,
+				negateQueue(divisor)
+			);
+			result = addQueues(result, {1});
+
+			comparisonResult = compare(workingDividend, divisor);
+		}
 	}
-	//</TODO>
-	return std::make_pair(result, dividend);
+
+	if(!result.empty())
+		return std::make_pair(result, workingDividend);
+	else
+		return std::make_pair(
+			std::deque<unsigned>({0}),
+			std::deque<unsigned>({0})
+		);
 }
 
 IntegerExchangeFormat unsignedMultiply(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
 ){
-	std::vector<unsigned> result;
+	std::deque<unsigned> result;
 	//<TODO type="performance" severity="high" reason="This algorithm needs optimization - it is the simplest implementation">
 	for(unsigned i = 0; i < _rhs.longInteger.size(); ++i){
 		const auto partialResult = multiplyWithShiftByNumber(
@@ -208,7 +251,7 @@ IntegerExchangeFormat unsignedMultiply(
 			_rhs.longInteger.at(i),
 			i
 		);
-		result = addVectors(result, partialResult);
+		result = addQueues(result, partialResult);
 	}
 	//</TODO>
 	//<TODO type="code style" severity="minor" reason="This check should not ever happen. There must be a way to omit it">
@@ -252,24 +295,18 @@ ResultOfComparison compare(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
 ){
-	const auto difference = subtract(_lhs, _rhs);
-
-	if(equals(difference, INTEGER_ZERO))
-		return ResultOfComparison::Equal;
-	else
-		return (getSign(difference.longInteger) == 0) ?
-			ResultOfComparison::LeftSideGreater :
-			ResultOfComparison::RightSideGreater;
+	return static_cast<ResultOfComparison>(
+		compareDeque(
+			_lhs.longInteger,
+			_rhs.longInteger
+		)
+	);
 }
 
 IntegerExchangeFormat negate(
 	const IntegerExchangeFormat &_lhs
 ){
-	auto result = _lhs.longInteger;
-	for(auto &it : result){
-		it = ~it;
-	}
-	return addVectors(result, {1});
+	return negateQueue(_lhs.longInteger);
 }
 
 IntegerExchangeFormat absoluteValue(
@@ -282,7 +319,7 @@ IntegerExchangeFormat add(
 	const IntegerExchangeFormat &_lhs,
 	const IntegerExchangeFormat &_rhs
 ){
-	return addVectors(_lhs.longInteger, _rhs.longInteger);
+	return addQueues(_lhs.longInteger, _rhs.longInteger);
 }
 
 IntegerExchangeFormat multiply(

@@ -4,7 +4,7 @@
 
 namespace Lpp{
 
-BigInteger::BigInteger(const std::vector<unsigned> &_longInt)
+BigInteger::BigInteger(const std::deque<unsigned> &_longInt)
 	: m_longInteger(_longInt)
 {}
 

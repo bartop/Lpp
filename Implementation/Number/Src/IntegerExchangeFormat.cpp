@@ -4,7 +4,7 @@
 namespace Lpp{
 
 IntegerExchangeFormat::IntegerExchangeFormat(
-	const std::vector<unsigned> &_longInteger
+	const std::deque<unsigned> &_longInteger
 ) noexcept : longInteger(_longInteger){}
 
 }
