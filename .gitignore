@@ -2,3 +2,6 @@
 *.a
 *.o
 *.exe
+tags
+Build
+Makefile
