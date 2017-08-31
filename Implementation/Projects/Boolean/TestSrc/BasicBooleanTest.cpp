@@ -1,7 +1,8 @@
 
 #define CATCH_CONFIG_MAIN
-#include "../../3rdParty/Catch/include/catch.hpp"
 #include "../Src/BasicBoolean.hpp"
+
+#include <catch.hpp>
 
 TEST_CASE( "BasicBoolean tests", "[BasicBoolean.hpp]" ) {
 	const auto trueBool = Lpp::boolean(true);

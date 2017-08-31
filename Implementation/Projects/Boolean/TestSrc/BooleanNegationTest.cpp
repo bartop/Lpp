@@ -1,7 +1,7 @@
 
 #define CATCH_CONFIG_MAIN
 
-#include "../../3rdParty/Catch/include/catch.hpp"
+#include <catch.hpp>
 #include "../Src/BasicBoolean.hpp"
 #include "../Src/BooleanNegation.hpp"
 

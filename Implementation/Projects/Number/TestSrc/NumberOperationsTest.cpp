@@ -7,7 +7,7 @@
 
 #include "../../Config/Src/config.hpp"
 
-#include "../../3rdParty/Catch/include/catch.hpp"
+#include <catch.hpp>
 
 using namespace Lpp;
 
