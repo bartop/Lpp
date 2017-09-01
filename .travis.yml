@@ -1,0 +1,32 @@
+  sudo: required
+dist: trusty
+language: cpp
+
+compiler:
+  - gcc
+
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-7" CC="gcc-7"; fi
+  - export CPLUS_INCLUDE_PATH=/usr/local/include
+
+  - sudo apt-get install -y cmake git
+
+addons:
+  apt:
+    sources:
+      - george-edison55-precise-backports # cmake 3.2.3 / doxygen 1.8.3
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
+      - cmake
+      - cmake-data
+      - libboost-all-dev
+
+before_script:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_CXX_COMPILER=$COMPILER -DCMAKE_BUILD_TYPE=Release ..
+
+script:
+  - make all
+  - ctest .
