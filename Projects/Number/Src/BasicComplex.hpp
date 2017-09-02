@@ -1,23 +1,16 @@
 
 #pragma once
 
-#include "Number.hpp"
+#include "../../Config/Src/typedefs.hpp"
 
 namespace Lpp{
 
+struct Number;
 struct RealNumber;
 
-class BasicComplex final : public Number{
-public:
-	BasicComplex(
-		Shared<const RealNumber> _realPart,
-		Shared<const RealNumber> _imaginaryPart);
-
-	NumberExchangeFormat numberValue() const final override;
-
-private:
-	const Shared<const RealNumber> m_realPart;
-	const Shared<const RealNumber> m_imaginaryPart;
-};
+Unique<Number> basicComplex(
+	Shared<const RealNumber> _realPart,
+	Shared<const RealNumber> _imaginaryPart
+);
 
 }

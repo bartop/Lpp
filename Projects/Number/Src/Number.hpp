@@ -5,8 +5,6 @@
 #include "../../Generic/Src/ValueObject.hpp"
 #include "../../Config/Src/config.hpp"
 
-#include <memory>
-
 namespace Lpp{
 
 struct Number : public ValueObject<Number> {

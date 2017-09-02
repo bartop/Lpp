@@ -1,21 +1,12 @@
 #pragma once
 
-#include "Integer.hpp"
+#include "../../Config/Src/typedefs.hpp"
 
 namespace Lpp{
 
-class IntegerSum final : public Integer {
-public:
-	IntegerSum(Shared<Integer> _lhs, Shared<Integer> _rhs);
+struct Integer;
 
-	IntegerExchangeFormat integerValue() const final override;
-
-private:
-	const Shared<Integer> m_lhs;
-	const Shared<Integer> m_rhs;
-};
-
-Unique<IntegerSum> sum(
+Unique<Integer> integerSum(
 	Shared<Integer> _lhs,
 	Shared<Integer> _rhs
 );

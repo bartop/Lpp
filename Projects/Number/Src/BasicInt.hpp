@@ -1,18 +1,12 @@
 
 #pragma once
 
-#include "Integer.hpp"
+#include "../../Config/Src/typedefs.hpp"
 
 namespace Lpp{
 
-class BasicInt final : public Integer {
-public:
-	BasicInt(int _int);
+struct Integer;
 
-	IntegerExchangeFormat integerValue() const final override;
-
-private:
-	const int m_int;
-};
+Unique<Integer> basicInt(int _int);
 
 }

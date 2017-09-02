@@ -1,22 +1,13 @@
 #pragma once
 
-#include "Integer.hpp"
+#include "../../Config/Src/typedefs.hpp"
 
 namespace Lpp{
 
-class RealNumber;
+struct RealNumber;
+struct Integer;
 
-class IntegerFromReal final : public Integer {
-public:
-	IntegerFromReal(Shared<RealNumber> _real);
-
-	IntegerExchangeFormat integerValue() const final override;
-
-private:
-	const Shared<RealNumber> m_real;
-};
-
-Unique<IntegerFromReal> toInteger(
+Unique<Integer> toInteger(
 	Shared<RealNumber> _real
 );
 
