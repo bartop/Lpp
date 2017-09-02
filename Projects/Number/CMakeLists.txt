@@ -23,6 +23,7 @@ set(TEST_SOURCES
 	TestSrc/IntegerOperationsTest.cpp
 	TestSrc/NumberOperationsTest.cpp
 	TestSrc/RealNumberOperationsTest.cpp
+    TestSrc/BasicIntTest.cpp
 )
 
 include_directories(${CATCH_INCLUDE_DIR})
