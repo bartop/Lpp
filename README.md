@@ -1,0 +1,3 @@
+[![Build Status](https://travis-ci.org/bartop/Lpp.svg?branch=master)](https://travis-ci.org/bartop/Lpp)
+# Lazy Cpp
+C++ as most (if not all) of imperative languages use so called [strict or eager evaluation](https://en.wikipedia.org/wiki/Eager_evaluation). This is not really resourceful. Oftentimes it ends up counting/evaluating something that will be used somwhere in future or even never. There would be nothing wrong with that if it did not waste a precious processor ticks. To address the issue of strict evaluation, this library proposes declarative interface for [lazy evaluation](https://en.wikipedia.org/wiki/Lazy_evaluation). The main idea of the library is to avoid waste of time by delaying the computations as much as possible. 
