@@ -1,6 +1,6 @@
 
-#include "Integer.hpp"
 #include "IntegerSum.hpp"
+#include "Integer.hpp"
 #include "IntegerOperations.hpp"
 
 namespace Lpp{

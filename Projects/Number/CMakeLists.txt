@@ -3,20 +3,21 @@ cmake_minimum_required(VERSION 2.8.10)
 project(Number C CXX)
 
 set(SOURCES
-	Src/BasicComplex.cpp
-	Src/BasicInt.cpp
-	Src/BigInteger.cpp
-	Src/Integer.cpp
-	Src/IntegerExchangeFormat.cpp
-	Src/IntegerFromReal.cpp
-	Src/IntegerOperations.cpp
-	Src/IntegerSum.cpp
-	Src/Number.cpp
-	Src/NumberExchangeFormat.cpp
-	Src/NumberOperations.cpp
-	Src/RealNumber.cpp
-	Src/RealNumberExchangeFormat.cpp
-	Src/RealNumberOperations.cpp
+    Src/Integer/BasicInt.cpp
+    Src/Integer/BigInteger.cpp
+    Src/Integer/Integer.cpp
+    Src/Integer/IntegerExchangeFormat.cpp
+    Src/Integer/IntegerFromReal.cpp
+    Src/Integer/IntegerNegation.cpp
+    Src/Integer/IntegerOperations.cpp
+    Src/Integer/IntegerSum.cpp
+    Src/Number/BasicComplex.cpp
+    Src/Number/Number.cpp
+    Src/Number/NumberExchangeFormat.cpp
+    Src/Number/NumberOperations.cpp
+    Src/Real/RealNumber.cpp
+    Src/Real/RealNumberExchangeFormat.cpp
+    Src/Real/RealNumberOperations.cpp
 )
 
 set(TEST_SOURCES

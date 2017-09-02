@@ -1,7 +1,7 @@
 
 
 #define CATCH_CONFIG_MAIN
-#include "../Src/IntegerOperations.hpp"
+#include "../Src/Integer/IntegerOperations.hpp"
 
 #include "../../Config/Src/config.hpp"
 

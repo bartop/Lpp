@@ -2,8 +2,10 @@
 #pragma once
 
 #include "RealNumberExchangeFormat.hpp"
-#include "Generic.hpp"
-#include "../../Generic/Src/Ordinal.hpp"
+
+#include "../Generic.hpp"
+
+#include "../../../Generic/Src/Ordinal.hpp"
 
 namespace Lpp{
 

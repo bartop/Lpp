@@ -1,7 +1,7 @@
 
 #include "RealNumberOperations.hpp"
 #include "RealNumberExchangeFormat.hpp"
-#include "IntegerOperations.hpp"
+#include "../Integer/IntegerOperations.hpp"
 
 namespace Lpp{
 

@@ -1,9 +1,9 @@
 
 #define CATCH_CONFIG_MAIN
 
-#include "../Src/BasicInt.hpp"
-#include "../Src/IntegerOperations.hpp"
-#include "../Src/Integer.hpp"
+#include "../Src/Integer/BasicInt.hpp"
+#include "../Src/Integer/IntegerOperations.hpp"
+#include "../Src/Integer/Integer.hpp"
 
 #include <limits>
 #include <catch.hpp>

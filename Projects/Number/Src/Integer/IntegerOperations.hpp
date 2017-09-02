@@ -1,9 +1,11 @@
 
 #pragma once
 
-#include "Generic.hpp"
 #include "IntegerExchangeFormat.hpp"
-#include "../../Generic/Src/Ordinal.hpp"
+
+#include "../Generic.hpp"
+
+#include "../../../Generic/Src/Ordinal.hpp"
 
 
 namespace Lpp{

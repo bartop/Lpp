@@ -1,6 +1,7 @@
 
-#include "RealNumberOperations.hpp"
 #include "NumberOperations.hpp"
+
+#include "../Real/RealNumberOperations.hpp"
 
 namespace Lpp{
 

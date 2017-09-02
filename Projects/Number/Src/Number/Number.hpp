@@ -2,8 +2,9 @@
 #pragma once
 
 #include "NumberExchangeFormat.hpp"
-#include "../../Generic/Src/ValueObject.hpp"
-#include "../../Config/Src/config.hpp"
+
+#include "../../../Generic/Src/ValueObject.hpp"
+#include "../../../Config/Src/config.hpp"
 
 namespace Lpp{
 

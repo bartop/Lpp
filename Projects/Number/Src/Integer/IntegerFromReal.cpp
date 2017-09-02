@@ -1,8 +1,9 @@
 
 #include "IntegerFromReal.hpp"
-#include "RealNumber.hpp"
 #include "IntegerOperations.hpp"
 #include "Integer.hpp"
+
+#include "../Real/RealNumber.hpp"
 
 namespace Lpp{
 

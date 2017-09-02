@@ -1,8 +1,9 @@
 
 #pragma once
 
-#include "RealNumber.hpp"
 #include "IntegerExchangeFormat.hpp"
+
+#include "../Real/RealNumber.hpp"
 
 namespace Lpp{
 

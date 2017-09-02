@@ -1,8 +1,7 @@
 
 #pragma once
 
-#include "IntegerExchangeFormat.hpp"
-#include "Generic.hpp"
+#include "../Integer/IntegerExchangeFormat.hpp"
 
 namespace Lpp{
 

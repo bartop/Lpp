@@ -2,7 +2,8 @@
 #pragma once
 
 #include "NumberExchangeFormat.hpp"
-#include "Generic.hpp"
+
+#include "../Generic.hpp"
 
 namespace Lpp{
 
