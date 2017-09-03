@@ -1,6 +1,10 @@
 
 #pragma once
 
+#include "Config/Src/typedefs.hpp"
+
+#include <deque>
+
 namespace Lpp{
 
 struct Integer;

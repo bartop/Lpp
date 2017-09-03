@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "../../../Config/Src/typedefs.hpp"
+#include "Config/Src/typedefs.hpp"
 
 namespace Lpp{
 

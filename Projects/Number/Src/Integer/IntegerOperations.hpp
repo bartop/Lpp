@@ -5,7 +5,7 @@
 
 #include "../Generic.hpp"
 
-#include "../../../Generic/Src/Ordinal.hpp"
+#include "Generic/Src/Ordinal.hpp"
 
 
 namespace Lpp{

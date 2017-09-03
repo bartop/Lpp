@@ -3,6 +3,8 @@
 
 #include "ValueObject.hpp"
 
+#include "Config/Src/config.hpp"
+
 namespace Lpp{
 
 enum class ResultOfComparison{
@@ -14,15 +16,16 @@ enum class ResultOfComparison{
 template<typename T>
 struct Ordinal : public ValueObject<T> {
 
-	bool equals(std::shared_ptr<const T> _valueObject) const final override;
+	bool equals(const Shared<const T> &_valueObject) const final override;
 
-	virtual ResultOfComparison compare(std::shared_ptr<const T> _valueObject) const = 0;
+	virtual ResultOfComparison compare(const Shared<const T> &_valueObject) const = 0;
 
 	virtual ~Ordinal() noexcept = default;
 };
 
 template<typename T>
-inline bool Ordinal<T>::equals(std::shared_ptr<const T> _valueObject) const{
+inline
+bool Ordinal<T>::equals(const Shared<const T> &_valueObject) const{
 	return compare(_valueObject) == ResultOfComparison::Equal;
 }
 

@@ -2,6 +2,7 @@
 #pragma once
 
 #include "Boolean.hpp"
+
 #include <functional>
 #include <memory>
 

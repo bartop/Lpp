@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.10)
 
 project(Lpp)
+
 #variables setup
 set(PROJDIR Projects)
 
@@ -26,6 +27,8 @@ endif()
 set(CATCH_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/External/Catch)
 add_library(Catch INTERFACE)
 target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
+
+include_directories("${CMAKE_SOURCE_DIR}/${PROJDIR}")
 
 if ("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
   message(SEND_ERROR "In-source builds are not allowed.")

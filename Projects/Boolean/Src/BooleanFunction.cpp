@@ -68,13 +68,13 @@ Unique<const Boolean> boolFunction(
 Unique<const Boolean> sharedBooleanFunction(
 	std::function<Shared<const Boolean>(void)> _function
 ){
-	return makeUnique<const BooleanFunction>(_function);
+	return makeUnique<BooleanFunction>(_function);
 }
 
 Unique<const Boolean> uniqueBooleanFunction(
 	std::function<Unique<const Boolean>(void)> _function
 ){
-	return makeUnique<const UniqueBooleanFunction>(_function);
+	return makeUnique<UniqueBooleanFunction>(_function);
 }
 
 }

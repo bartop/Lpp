@@ -3,18 +3,22 @@
 
 #include <memory>
 
+#include "Config/Src/config.hpp"
+
 namespace Lpp{
 
 template<typename T>
 struct ValueObject{
-	virtual bool equals(std::shared_ptr<const T> _valueObject) const = 0;
-	bool differs(std::shared_ptr<const T> _valueObject) const;
+	virtual bool equals(const Shared<const T> &_valueObject) const = 0;
+	bool differs(const Shared<const T> &_valueObject) const;
 
 	virtual ~ValueObject() noexcept = default;
 };
 
 template<typename T>
-bool ValueObject<T>::differs(std::shared_ptr<const T> _valueObject) const{
+bool ValueObject<T>::differs(
+	const Shared<const T> &_valueObject
+) const {
 	return !this->equals(_valueObject);
 }
 

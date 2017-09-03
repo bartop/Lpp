@@ -2,12 +2,13 @@
 #pragma once
 
 #include "Boolean.hpp"
+
 #include <memory>
 
 namespace Lpp{
 
-Unique<Boolean> booleanCache(
-	Shared<const Boolean> _boolean
+Unique<const Boolean> booleanCache(
+	const Shared<const Boolean> &_boolean
 );
 
 }

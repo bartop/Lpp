@@ -6,9 +6,9 @@
 
 namespace Lpp{
 
-Unique<Boolean> logicalAnd(
-	Shared<const Boolean> _left,
-	Shared<const Boolean> _right
+Unique<const Boolean> logicalAnd(
+	const Shared<const Boolean> &_left,
+	const Shared<const Boolean> &_right
 );
 
 }

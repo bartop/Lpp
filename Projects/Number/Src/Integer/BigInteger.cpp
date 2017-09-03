@@ -1,6 +1,6 @@
 
-#include "Integer.hpp"
 #include "BigInteger.hpp"
+#include "Integer.hpp"
 #include "IntegerExchangeFormat.hpp"
 
 namespace Lpp{

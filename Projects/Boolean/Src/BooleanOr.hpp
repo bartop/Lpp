@@ -2,13 +2,14 @@
 #pragma once
 
 #include "Boolean.hpp"
+
 #include <memory>
 
 namespace Lpp{
 
-Unique<Boolean> logicalOr(
-	Shared<const Boolean> _left,
-	Shared<const Boolean> _right
+Unique<const Boolean> logicalOr(
+	const Shared<const Boolean> &_left,
+	const Shared<const Boolean> &_right
 );
 
 }
