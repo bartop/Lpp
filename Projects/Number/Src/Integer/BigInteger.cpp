@@ -27,7 +27,7 @@ IntegerExchangeFormat BigInteger::integerValue() const{
 
 }
 
-Unique<Integer> bigInteger(
+Unique<const Integer> bigInteger(
 	const std::deque<unsigned> &_bigInteger
 ){
 	return makeUnique<BigInteger>(_bigInteger);

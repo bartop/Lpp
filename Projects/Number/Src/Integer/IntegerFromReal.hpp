@@ -7,8 +7,8 @@ namespace Lpp{
 struct RealNumber;
 struct Integer;
 
-Unique<Integer> toInteger(
-	Shared<RealNumber> _real
+Unique<const Integer> toInteger(
+	const Shared<const RealNumber> &_real
 );
 
 }

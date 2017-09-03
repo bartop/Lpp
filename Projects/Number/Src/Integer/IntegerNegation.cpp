@@ -10,15 +10,15 @@ namespace{
 
 class IntegerNegation final : public Integer {
 public:
-	IntegerNegation(Shared<Integer> _toNegate);
+	IntegerNegation(const Shared<const Integer> &_toNegate);
 
 	IntegerExchangeFormat integerValue() const final override;
 
 private:
-	const Shared<Integer> m_toNegate;
+	const Shared<const Integer> m_toNegate;
 };
 
-IntegerNegation::IntegerNegation(Shared<Integer> _toNegate)
+IntegerNegation::IntegerNegation(const Shared<const Integer> &_toNegate)
 	: m_toNegate(_toNegate)
 {}
 
@@ -28,8 +28,8 @@ IntegerExchangeFormat IntegerNegation::integerValue() const {
 
 }
 
-Unique<Integer> integerNegation(
-	Shared<Integer> _toNegate
+Unique<const Integer> integerNegation(
+	const Shared<Integer> &_toNegate
 ){
 	return makeUnique<IntegerNegation>(_toNegate);
 }

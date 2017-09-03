@@ -7,6 +7,6 @@ namespace Lpp{
 
 struct Integer;
 
-Unique<Integer> basicInt(int _int);
+Unique<const Integer> basicInt(int _int);
 
 }

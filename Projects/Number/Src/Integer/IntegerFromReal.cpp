@@ -11,15 +11,15 @@ namespace{
 
 class IntegerFromReal final : public Integer {
 public:
-	IntegerFromReal(Shared<RealNumber> _real);
+	IntegerFromReal(const Shared<const RealNumber> &_real);
 
 	IntegerExchangeFormat integerValue() const final override;
 
 private:
-	const Shared<RealNumber> m_real;
+	const Shared<const RealNumber> m_real;
 };
 
-IntegerFromReal::IntegerFromReal(Shared<RealNumber> _real)
+IntegerFromReal::IntegerFromReal(const Shared<const RealNumber> &_real)
 	: m_real(_real)
 {}
 
@@ -30,10 +30,10 @@ IntegerExchangeFormat IntegerFromReal::integerValue() const {
 
 }
 
-Unique<Integer> toInteger(
-	Shared<RealNumber> _real
+Unique<const Integer> toInteger(
+	const Shared<const RealNumber> &_real
 ){
-	return std::make_unique<IntegerFromReal>(_real);
+	return makeUnique<IntegerFromReal>(_real);
 }
 
 }

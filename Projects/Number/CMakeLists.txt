@@ -5,11 +5,15 @@ project(Number C CXX)
 set(SOURCES
     Src/Integer/BasicInt.cpp
     Src/Integer/BigInteger.cpp
+    Src/Integer/DivisionRemainder.cpp
     Src/Integer/Integer.cpp
+    Src/Integer/IntegerDifference.cpp
     Src/Integer/IntegerExchangeFormat.cpp
     Src/Integer/IntegerFromReal.cpp
     Src/Integer/IntegerNegation.cpp
     Src/Integer/IntegerOperations.cpp
+    Src/Integer/IntegerProduct.cpp
+    Src/Integer/IntegerQuotient.cpp
     Src/Integer/IntegerSum.cpp
     Src/Number/BasicComplex.cpp
     Src/Number/Number.cpp

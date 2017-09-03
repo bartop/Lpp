@@ -27,7 +27,7 @@ IntegerExchangeFormat BasicInt::integerValue() const{
 
 }
 
-Unique<Integer> basicInt(int _int){
+Unique<const Integer> basicInt(int _int){
 	return makeUnique<BasicInt>(_int);
 }
 

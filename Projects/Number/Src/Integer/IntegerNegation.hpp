@@ -1,14 +1,14 @@
 
 #pragma once
 
-#include "Config/Src/typedefs.hpp"
+#include "Config/Src/config.hpp"
 
 namespace Lpp{
 
 struct Integer;
 
-Unique<Integer> integerNegation(
-	Shared<Integer> _toNegate
+Unique<const Integer> integerNegation(
+	const Shared<const Integer> &_toNegate
 );
 
 }

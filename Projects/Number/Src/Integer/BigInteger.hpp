@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "Config/Src/typedefs.hpp"
+#include "Config/Src/config.hpp"
 
 #include <deque>
 
@@ -9,7 +9,7 @@ namespace Lpp{
 
 struct Integer;
 
-Unique<Integer> bigInteger(
+Unique<const Integer> bigInteger(
 	const std::deque<unsigned> &_bigInteger
 );
 
