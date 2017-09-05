@@ -19,9 +19,14 @@ set(SOURCES
     Src/Number/Number.cpp
     Src/Number/NumberExchangeFormat.cpp
     Src/Number/NumberOperations.cpp
+    Src/Real/RealDifference.cpp
+    Src/Real/RealNegation.cpp
     Src/Real/RealNumber.cpp
     Src/Real/RealNumberExchangeFormat.cpp
     Src/Real/RealNumberOperations.cpp
+    Src/Real/RealProduct.cpp
+    Src/Real/RealQuotient.cpp
+    Src/Real/RealSum.cpp
 )
 
 set(TEST_SOURCES
