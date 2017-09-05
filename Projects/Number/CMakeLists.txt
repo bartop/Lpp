@@ -16,9 +16,14 @@ set(SOURCES
     Src/Integer/IntegerQuotient.cpp
     Src/Integer/IntegerSum.cpp
     Src/Number/BasicComplex.cpp
+    Src/Number/Difference.cpp
+    Src/Number/Negation.cpp
     Src/Number/Number.cpp
     Src/Number/NumberExchangeFormat.cpp
     Src/Number/NumberOperations.cpp
+    Src/Number/Product.cpp
+    Src/Number/Quotient.cpp
+    Src/Number/Sum.cpp
     Src/Real/RealDifference.cpp
     Src/Real/RealNegation.cpp
     Src/Real/RealNumber.cpp

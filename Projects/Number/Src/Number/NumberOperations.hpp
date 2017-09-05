@@ -12,6 +12,10 @@ bool equals(
 	const NumberExchangeFormat &_rhs
 );
 
+NumberExchangeFormat negate(
+	const NumberExchangeFormat &_number
+);
+
 NumberExchangeFormat add(
 	const NumberExchangeFormat &_lhs,
 	const NumberExchangeFormat &_rhs

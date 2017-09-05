@@ -13,6 +13,15 @@ bool equals(
 		equals(_lhs.imaginaryPart, _rhs.imaginaryPart);
 }
 
+NumberExchangeFormat negate(
+	const NumberExchangeFormat &_number
+){
+	return NumberExchangeFormat(
+		negate(_number.realPart),
+		negate(_number.imaginaryPart)
+	);
+}
+
 NumberExchangeFormat add(
 	const NumberExchangeFormat &_lhs,
 	const NumberExchangeFormat &_rhs
