@@ -41,3 +41,4 @@ endif ()
 
 add_subdirectory(${PROJDIR}/Boolean)
 add_subdirectory(${PROJDIR}/Number)
+add_subdirectory(${PROJDIR}/String)
