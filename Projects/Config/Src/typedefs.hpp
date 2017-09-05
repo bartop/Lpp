@@ -2,6 +2,7 @@
 #pragma once
 
 #include "defines.hpp"
+
 #include <memory>
 
 namespace Lpp{

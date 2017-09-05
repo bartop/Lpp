@@ -20,6 +20,7 @@ struct Ordinal : public ValueObject<T> {
 
 	virtual ResultOfComparison compare(const Shared<const T> &_valueObject) const = 0;
 
+protected:
 	virtual ~Ordinal() noexcept = default;
 };
 

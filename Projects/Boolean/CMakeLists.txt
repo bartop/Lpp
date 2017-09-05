@@ -6,7 +6,6 @@ set(SOURCES
 	Src/BasicBoolean.cpp
 	Src/Boolean.cpp
 	Src/BooleanAnd.cpp
-	Src/BooleanFunction.cpp
 	Src/BooleanNegation.cpp
 	Src/BooleanOr.cpp
 	Src/CachingBoolean.cpp

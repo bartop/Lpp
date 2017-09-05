@@ -1,48 +1,29 @@
 
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
+
 #include "../Src/BasicBoolean.hpp"
-#include "../Src/BooleanFunction.hpp"
+#include "../../Generic/Src/Function.hpp"
 
 TEST_CASE( "BooleanFunction tests", "[BooleanFunction.hpp]" ) {
-	const auto boolFun1 = Lpp::boolFunction([](){
+	const auto boolFun1 = Lpp::Function<Lpp::Boolean, bool>([](){
 		return Lpp::boolean(true)->value();
 	});
 
-	const auto boolFun2 = Lpp::boolFunction([](){
+	const auto boolFun2 = Lpp::Function<Lpp::Boolean, bool>([](){
 		return Lpp::boolean(false)->value();
 	});
 
-	const auto boolFun3 = Lpp::boolFunction([](){
+	const auto boolFun3 = Lpp::Function<Lpp::Boolean, bool>([](){
 		return true;
 	});
 
-	const auto boolFun4 = Lpp::boolFunction([](){
+	const auto boolFun4 = Lpp::Function<Lpp::Boolean, bool>([](){
 		return false;
 	});
 
-	const auto boolFun5 = Lpp::sharedBooleanFunction([]() {
-		return Lpp::boolean(true);
-	});
-
-	const auto boolFun6 = Lpp::sharedBooleanFunction([]() {
-		return Lpp::boolean(false);
-	});
-
-	const auto boolFun7 = Lpp::uniqueBooleanFunction([]() {
-		return Lpp::boolean(true);
-	});
-
-	const auto boolFun8 = Lpp::uniqueBooleanFunction([]() {
-		return Lpp::boolean(false);
-	});
-
-	REQUIRE( boolFun1->value() );
-	REQUIRE( !boolFun2->value() );
-	REQUIRE( boolFun3->value() );
-	REQUIRE( !boolFun4->value() );
-	REQUIRE( boolFun5->value() );
-	REQUIRE( !boolFun6->value() );
-	REQUIRE( boolFun7->value() );
-	REQUIRE( !boolFun8->value() );
+	REQUIRE( boolFun1.value() );
+	REQUIRE( !boolFun2.value() );
+	REQUIRE( boolFun3.value() );
+	REQUIRE( !boolFun4.value() );
 }
