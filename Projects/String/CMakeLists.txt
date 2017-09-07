@@ -4,6 +4,7 @@ project(String C CXX)
 
 set(SOURCES
     Src/String.cpp
+    Src/BasicString.cpp
 )
 
 set(TEST_SOURCES

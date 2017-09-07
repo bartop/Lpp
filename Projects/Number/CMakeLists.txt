@@ -5,6 +5,7 @@ project(Number C CXX)
 set(SOURCES
     Src/Integer/BasicInt.cpp
     Src/Integer/BigInteger.cpp
+    Src/Integer/CachingInteger.cpp
     Src/Integer/DivisionRemainder.cpp
     Src/Integer/Integer.cpp
     Src/Integer/IntegerDifference.cpp
@@ -16,6 +17,7 @@ set(SOURCES
     Src/Integer/IntegerQuotient.cpp
     Src/Integer/IntegerSum.cpp
     Src/Number/BasicComplex.cpp
+    Src/Number/CachingNumber.cpp
     Src/Number/Difference.cpp
     Src/Number/Negation.cpp
     Src/Number/Number.cpp
@@ -24,6 +26,7 @@ set(SOURCES
     Src/Number/Product.cpp
     Src/Number/Quotient.cpp
     Src/Number/Sum.cpp
+    Src/Real/CachingReal.cpp
     Src/Real/RealDifference.cpp
     Src/Real/RealNegation.cpp
     Src/Real/RealNumber.cpp
