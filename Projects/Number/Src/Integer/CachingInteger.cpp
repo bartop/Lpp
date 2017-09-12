@@ -3,8 +3,6 @@
 #include "Integer.hpp"
 #include "IntegerOperations.hpp"
 
-#include <optional>
-
 namespace Lpp{
 
 namespace{
@@ -18,7 +16,7 @@ public:
 private:
 	const Shared<const Integer> m_integer;
 
-	mutable std::optional<IntegerExchangeFormat> m_cache;
+	mutable Optional<IntegerExchangeFormat> m_cache;
 };
 
 CachingInteger::CachingInteger(const Shared<const Integer> &_integer)
@@ -26,7 +24,7 @@ CachingInteger::CachingInteger(const Shared<const Integer> &_integer)
 {}
 
 IntegerExchangeFormat CachingInteger::integerValue() const {
-	if (!m_cache.has_value())
+	if (!m_cache.is_initialized())
 		m_cache.emplace(m_integer->integerValue());
 	return *m_cache;
 }

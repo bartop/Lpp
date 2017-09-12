@@ -3,8 +3,10 @@ cmake_minimum_required(VERSION 2.8.10)
 project(String C CXX)
 
 set(SOURCES
-    Src/String.cpp
     Src/BasicString.cpp
+    Src/String.cpp
+    Src/StringConcatenation.cpp
+    Src/Substring.cpp
 )
 
 set(TEST_SOURCES
@@ -14,8 +16,8 @@ include_directories(${CATCH_INCLUDE_DIR})
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED 17
+    CXX_STANDARD 14
+    CXX_STANDARD_REQUIRED 14
     CXX_EXTENSIONS OFF
 )
 

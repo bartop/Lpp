@@ -28,6 +28,9 @@ set(CATCH_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/External/Catch)
 add_library(Catch INTERFACE)
 target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
 
+find_package(Boost REQUIRED COMPONENTS)
+include_directories(${Boost_INCLUDE_DIRS})
+
 include_directories("${CMAKE_SOURCE_DIR}/${PROJDIR}")
 
 if ("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")

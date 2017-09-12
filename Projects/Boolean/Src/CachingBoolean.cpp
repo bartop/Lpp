@@ -1,8 +1,6 @@
 
 #include "CachingBoolean.hpp"
 
-#include <optional>
-
 namespace Lpp{
 
 namespace{
@@ -16,7 +14,7 @@ public:
 private:
 	Shared<const Boolean> m_boolean;
 
-	mutable std::optional<bool> m_cache;
+	mutable Optional<bool> m_cache;
 };
 
 CachingBoolean::CachingBoolean(
@@ -25,7 +23,7 @@ CachingBoolean::CachingBoolean(
 {}
 
 bool CachingBoolean::value() const {
-	if (!m_cache.has_value())
+	if (!m_cache.is_initialized())
 		m_cache = m_boolean->value();
 	return *m_cache;
 }

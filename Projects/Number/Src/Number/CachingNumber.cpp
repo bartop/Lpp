@@ -3,8 +3,6 @@
 #include "Number.hpp"
 #include "NumberOperations.hpp"
 
-#include <optional>
-
 namespace Lpp{
 
 namespace{
@@ -18,7 +16,7 @@ public:
 private:
 	const Shared<const Number> m_number;
 
-	mutable std::optional<NumberExchangeFormat> m_cache;
+	mutable Optional<NumberExchangeFormat> m_cache;
 };
 
 CachingNumber::CachingNumber(const Shared<const Number> &_number)
@@ -26,7 +24,7 @@ CachingNumber::CachingNumber(const Shared<const Number> &_number)
 {}
 
 NumberExchangeFormat CachingNumber::numberValue() const {
-	if (!m_cache.has_value())
+	if (!m_cache.is_initialized())
 		m_cache.emplace(m_number->numberValue());
 	return *m_cache;
 }

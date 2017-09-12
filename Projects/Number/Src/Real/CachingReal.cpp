@@ -3,8 +3,6 @@
 #include "RealNumber.hpp"
 #include "RealNumberOperations.hpp"
 
-#include <optional>
-
 namespace Lpp{
 
 namespace{
@@ -18,7 +16,7 @@ public:
 private:
 	const Shared<const RealNumber> m_real;
 
-	mutable std::optional<RealNumberExchangeFormat> m_cache;
+	mutable Optional<RealNumberExchangeFormat> m_cache;
 };
 
 CachingRealNumber::CachingRealNumber(const Shared<const RealNumber> &_real)
@@ -26,7 +24,7 @@ CachingRealNumber::CachingRealNumber(const Shared<const RealNumber> &_real)
 {}
 
 RealNumberExchangeFormat CachingRealNumber::realValue() const {
-	if (!m_cache.has_value())
+	if (!m_cache.is_initialized())
 		m_cache.emplace(m_real->realValue());
 	return *m_cache;
 }
