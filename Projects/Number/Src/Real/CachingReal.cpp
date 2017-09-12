@@ -3,6 +3,8 @@
 #include "RealNumber.hpp"
 #include "RealNumberOperations.hpp"
 
+#include <boost/utility/in_place_factory.hpp>
+
 namespace Lpp{
 
 namespace{
@@ -25,7 +27,7 @@ CachingRealNumber::CachingRealNumber(const Shared<const RealNumber> &_real)
 
 RealNumberExchangeFormat CachingRealNumber::realValue() const {
 	if (!m_cache.is_initialized())
-		m_cache.emplace(m_real->realValue());
+		m_cache = boost::in_place(m_real->realValue());
 	return *m_cache;
 }
 

@@ -3,6 +3,8 @@
 #include "Number.hpp"
 #include "NumberOperations.hpp"
 
+#include <boost/utility/in_place_factory.hpp>
+
 namespace Lpp{
 
 namespace{
@@ -25,7 +27,7 @@ CachingNumber::CachingNumber(const Shared<const Number> &_number)
 
 NumberExchangeFormat CachingNumber::numberValue() const {
 	if (!m_cache.is_initialized())
-		m_cache.emplace(m_number->numberValue());
+		m_cache = boost::in_place(m_number->numberValue());
 	return *m_cache;
 }
 

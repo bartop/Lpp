@@ -3,6 +3,8 @@
 #include "Integer.hpp"
 #include "IntegerOperations.hpp"
 
+#include <boost/utility/in_place_factory.hpp>
+
 namespace Lpp{
 
 namespace{
@@ -25,7 +27,7 @@ CachingInteger::CachingInteger(const Shared<const Integer> &_integer)
 
 IntegerExchangeFormat CachingInteger::integerValue() const {
 	if (!m_cache.is_initialized())
-		m_cache.emplace(m_integer->integerValue());
+		m_cache = boost::in_place(m_integer->integerValue());
 	return *m_cache;
 }
 
