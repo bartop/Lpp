@@ -15,4 +15,7 @@ struct NumberExchangeFormat final{
 	const RealNumberExchangeFormat imaginaryPart;
 };
 
+const NumberExchangeFormat NUMBER_ZERO =
+	NumberExchangeFormat(REAL_ZERO, REAL_ZERO);
+
 }
